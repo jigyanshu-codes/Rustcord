@@ -56,7 +56,7 @@ Official pre-compiled binaries are published on [GitHub Releases (v0.1.0)](https
   chmod +x rustcord-0.1.0-Linux-X64.AppImage
   ./rustcord-0.1.0-Linux-X64.AppImage
   ```
-- **[Direct Download: Ubuntu / Debian (.deb)](https://github.com/jigyanshu-codes/Rustcord/releases/tag/v0.1.0)** &mdash; Native deb package for Ubuntu 24.04/26.04, Debian 12+, and Linux Mint:
+- **[Direct Download: Ubuntu / Debian (.deb)](https://github.com/jigyanshu-codes/Rustcord/releases/download/v0.1.0/rustcord-development-Linux-ubuntu-26.04-rustcord_0.1.0-1_amd64.deb)** &mdash; Native deb package for Ubuntu 24.04/26.04, Debian 12+, and Linux Mint:
   ```bash
   sudo dpkg -i rustcord_*_amd64.deb
   sudo apt-get install -f
