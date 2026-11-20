@@ -62,7 +62,7 @@ Flatpak is the recommended distribution format for Linux, featuring sandbox isol
 
 - **One-Click Repository Install (Automatic Updates)**:
   ```sh
-  flatpak install --user https://viceverse-cz.github.io/RustCord/flatpak/serein.flatpakref
+  flatpak install --user https://jigyanshu-codes.github.io/Rustcord/flatpak/rustcord.flatpakref
   ```
   Once installed, your desktop software store (GNOME Software, KDE Discover) or `flatpak update` will automatically discover and install updates.
 
@@ -79,16 +79,16 @@ See [Flatpak guide](packaging/flatpak/README.md) for sandbox permissions and sou
 
 Configure the signed package repository for your distribution with one command:
 ```sh
-curl -fsSL https://viceverse-cz.github.io/RustCord/setup.sh | sh
+curl -fsSL https://jigyanshu-codes.github.io/Rustcord/setup.sh | sh
 ```
 The script detects your distribution (Ubuntu/Debian, Fedora, openSUSE, Arch Linux), cryptographically verifies the GPG signing key, and configures the repository with an option to install immediately.
 
 After setup, manage RustCord with your native package manager:
 ```sh
-# Ubuntu / Debian: sudo apt install serein
-# Fedora:          sudo dnf install serein
-# openSUSE:        sudo zypper install serein
-# Arch Linux:      sudo pacman -S serein
+# Ubuntu / Debian: sudo apt install rustcord
+# Fedora:          sudo dnf install rustcord
+# openSUSE:        sudo zypper install rustcord
+# Arch Linux:      sudo pacman -S rustcord
 ```
 Your normal system updates (`apt upgrade`, `dnf upgrade`, `zypper update`, `pacman -Syu`) will keep RustCord updated. See [Signed package repositories](packaging/repositories/README.md) for manual GPG verification steps.
 
@@ -200,10 +200,10 @@ If you use Home Manager as a NixOS module instead, pass `inputs` through its own
 
 #### 5. Standalone AppImage (Portable)
 
-Download `serein-<version>-Linux-X64.AppImage` from [Releases](https://github.com/jigyanshu-codes/Rustcord/releases), make it executable, and run:
+Download `rustcord-<version>-Linux-X64.AppImage` from [Releases](https://github.com/jigyanshu-codes/Rustcord/releases), make it executable, and run:
 ```sh
-chmod +x ./serein-*-Linux-X64.AppImage
-./serein-*-Linux-X64.AppImage
+chmod +x ./rustcord-*-Linux-X64.AppImage
+./rustcord-*-Linux-X64.AppImage
 ```
 Keep the AppImage in a writable directory to receive in-app updates via **Settings → Updates**. Note that the AppImage uses host GTK4 and WebKitGTK 6.0 libraries; see [AppImage setup and runtime dependencies](packaging/appimage/README.md) for host requirements.
 
@@ -249,7 +249,7 @@ brew install --cask serein
 The cask lives in the small [`homebrew-serein`](https://github.com/jigyanshu-codes/homebrew-serein) tap, so installing does not clone this repository. If you tapped the old URL, run `brew untap jigyanshu-codes/serein` first and tap again.
 
 #### Standalone Bundle
-Download `serein-<version>-macOS-ARM64.zip` from [Releases](https://github.com/jigyanshu-codes/Rustcord/releases), unzip, and drag `RustCord.app` to your `/Applications` folder.
+Download `rustcord-<version>-macOS-ARM64.zip` from [Releases](https://github.com/jigyanshu-codes/Rustcord/releases), unzip, and drag `RustCord.app` to your `/Applications` folder.
 
 </details>
 

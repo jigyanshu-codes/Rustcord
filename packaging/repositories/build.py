@@ -151,8 +151,8 @@ def generate_index(destination: Path):
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Serein Linux Repositories</title>
-  <meta http-equiv="refresh" content="0; url=https://github.com/ViceVerse-cz/Serein">
+  <title>RustCord Linux Repositories</title>
+  <meta http-equiv="refresh" content="0; url=https://github.com/jigyanshu-codes/Rustcord">
   <style>
     body { font-family: system-ui, -apple-system, sans-serif; background: #111214; color: #dbdee1; display: flex; align-items: center; justify-content: center; height: 100vh; margin: 0; }
     .card { background: #2b2d31; padding: 2rem; border-radius: 8px; text-align: center; max-width: 480px; box-shadow: 0 8px 24px rgba(0,0,0,0.4); }
@@ -164,10 +164,10 @@ def generate_index(destination: Path):
 </head>
 <body>
   <div class="card">
-    <h1>Serein Linux Repositories</h1>
-    <p>Signed native packages and Flatpak repository for Serein.</p>
-    <p>Run <code>curl -fsSL https://viceverse-cz.github.io/Serein/setup.sh | sh</code> to install.</p>
-    <p><a href="https://github.com/ViceVerse-cz/Serein">View project on GitHub &rarr;</a></p>
+    <h1>RustCord Linux Repositories</h1>
+    <p>Signed native packages and Flatpak repository for RustCord.</p>
+    <p>Run <code>curl -fsSL https://jigyanshu-codes.github.io/Rustcord/setup.sh | sh</code> to install.</p>
+    <p><a href="https://github.com/jigyanshu-codes/Rustcord">View project on GitHub &rarr;</a></p>
   </div>
 </body>
 </html>

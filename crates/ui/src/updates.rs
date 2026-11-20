@@ -675,7 +675,7 @@ impl MessagingUi {
 				if index > 0 {
 					design::card_divider(ui);
 				}
-				let title = format!("Serein {}", entry.version);
+				let title = format!("RustCord {}", entry.version);
 				egui::CollapsingHeader::new(
 					design::semibold(ui, &title, 14.0).color(colors.text_strong),
 				)
