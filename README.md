@@ -47,32 +47,29 @@
 
 ## Downloads and Packages
 
-Pre-compiled production binaries are automatically generated and tested via GitHub Actions CI:
+Official pre-compiled binaries are published on [GitHub Releases (v0.1.0)](https://github.com/jigyanshu-codes/Rustcord/releases/tag/v0.1.0):
 
-### <img src="https://img.shields.io/badge/Windows-0078D6?style=flat-square&logo=windows&logoColor=white" height="18" /> Windows (x86_64 & ARM64)
+### <img src="https://img.shields.io/badge/Linux-FCC624?style=flat-square&logo=linux&logoColor=black" height="18" /> Linux (Universal & Distributions)
 
-- **Installer (`Setup.exe`)**: Installs per-user to `%LOCALAPPDATA%\Programs\RustCord`, configures Start Menu and Desktop shortcuts, and registers native Windows toast notification handling.
-- **Standalone Portable (`.zip`)**: Extract and run `rustcord.exe` directly from any folder.
-- [Download Windows Packages](https://github.com/jigyanshu-codes/Rustcord/actions)
-
-### <img src="https://img.shields.io/badge/Linux-FCC624?style=flat-square&logo=linux&logoColor=black" height="18" /> Linux (Debian, Ubuntu, AppImage, Arch, Fedora)
-
-- **Debian / Ubuntu (`.deb`)**:
+- **[Direct Download: Universal AppImage (.AppImage)](https://github.com/jigyanshu-codes/Rustcord/releases/download/v0.1.0/rustcord-0.1.0-Linux-X64.AppImage)** &mdash; Works on all Linux distributions (Ubuntu, Fedora, Arch, Debian, Mint).
+  ```bash
+  chmod +x rustcord-0.1.0-Linux-X64.AppImage
+  ./rustcord-0.1.0-Linux-X64.AppImage
+  ```
+- **[Direct Download: Ubuntu / Debian (.deb)](https://github.com/jigyanshu-codes/Rustcord/releases/tag/v0.1.0)** &mdash; Native deb package for Ubuntu 24.04/26.04, Debian 12+, and Linux Mint:
   ```bash
   sudo dpkg -i rustcord_*_amd64.deb
   sudo apt-get install -f
   ```
-- **Universal AppImage (Portable)**:
-  ```bash
-  chmod +x rustcord-*-Linux-X64.AppImage
-  ./rustcord-*-Linux-X64.AppImage
-  ```
-- **Fedora / RHEL (`.rpm`)** & **Arch Linux (`.pkg.tar.zst`)**: Available in CI release artifacts.
-- [Download Linux Packages (.deb / AppImage)](https://github.com/jigyanshu-codes/Rustcord/actions/workflows/linux-packages.yml)
+
+### <img src="https://img.shields.io/badge/Windows-0078D6?style=flat-square&logo=windows&logoColor=white" height="18" /> Windows (x86_64)
+
+- **[Direct Download: Windows Portable (.zip)](https://github.com/jigyanshu-codes/Rustcord/releases/download/v0.1.0/rustcord-v0.1.0-windows-x86_64.zip)** &mdash; Extract and run `rustcord.exe` directly.
+- **Installer (`Setup.exe`)**: Installs to `%LOCALAPPDATA%\Programs\RustCord`, configures Start Menu shortcuts and native toast notifications.
 
 ### <img src="https://img.shields.io/badge/macOS-000000?style=flat-square&logo=apple&logoColor=white" height="18" /> macOS (Apple Silicon / ARM64)
 
-- Standalone `.app` bundle available under releases.
+- Standalone `.app` bundle available under [Releases](https://github.com/jigyanshu-codes/Rustcord/releases).
 
 ---
 
