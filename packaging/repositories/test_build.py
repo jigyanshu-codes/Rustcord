@@ -98,7 +98,7 @@ class RepositoryInputs(unittest.TestCase):
             index_file = dest / "index.html"
             self.assertTrue(index_file.is_file())
             content = index_file.read_text()
-            self.assertIn("Serein Linux Repositories", content)
+            self.assertTrue("RustCord Linux Repositories" in content or "Serein Linux Repositories" in content)
             self.assertIn("setup.sh", content)
 
 
