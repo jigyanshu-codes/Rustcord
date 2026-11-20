@@ -12,7 +12,7 @@
   <launchable type="desktop-id">cz.viceverse.serein.desktop</launchable>
   <url type="homepage">https://github.com/jigyanshu-codes/Rustcord</url>
   <url type="bugtracker">https://github.com/jigyanshu-codes/Rustcord/issues</url>
-  <developer id="io.github.rustcord"><name>RustCord contributors</name></developer>
+  <developer id="cz.viceverse"><name>RustCord contributors</name></developer>
   <content_rating type="oars-1.1">
     <content_attribute id="social-chat">intense</content_attribute>
     <content_attribute id="social-audio">intense</content_attribute>
