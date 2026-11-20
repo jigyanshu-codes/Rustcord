@@ -79,8 +79,6 @@ pub enum Icon {
 	Verified,
 	Calendar,
 	RustCord,
-	#[doc(hidden)]
-	Serein,
 	File,
 	FileImage,
 	FilePdf,
@@ -317,7 +315,7 @@ impl Icon {
 			Icon::Copy => "copy",
 			Icon::Verified => "seal-check",
 			Icon::Calendar => "calendar-blank",
-			Icon::RustCord | Icon::Serein => "serein-mark",
+			Icon::RustCord => "serein-mark",
 			Icon::File => "file",
 			Icon::FileImage => "file-image",
 			Icon::FilePdf => "file-pdf",

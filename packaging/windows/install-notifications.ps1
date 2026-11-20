@@ -56,9 +56,9 @@ try {
     $link = $shell.CreateShortcut($shortcut)
     $link.TargetPath = $executable
     $link.WorkingDirectory = $PSScriptRoot
-    $link.Description = 'Serein'
+    $link.Description = 'RustCord'
     $link.Save()
-    [SereinShortcut]::SetAppId($shortcut)
+    [RustCordShortcut]::SetAppId($shortcut)
 } catch {
     if (Test-Path -LiteralPath $shortcut) { Remove-Item -LiteralPath $shortcut }
     throw
@@ -66,4 +66,4 @@ try {
     if ($null -ne $link) { [void][Runtime.InteropServices.Marshal]::FinalReleaseComObject($link) }
     [void][Runtime.InteropServices.Marshal]::FinalReleaseComObject($shell)
 }
-Write-Output 'Serein Start Menu shortcut registered. Enable system notifications separately in Serein for each session.'
+Write-Output 'RustCord Start Menu shortcut registered. Enable system notifications separately in RustCord for each session.'

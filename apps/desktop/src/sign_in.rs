@@ -1201,7 +1201,7 @@ fn app_mark(ui: &mut egui::Ui, size: f32) {
 		.rect_filled(mark, (size * 0.25).round() as u8, p.accent);
 	ui::icons::paint(
 		ui.painter(),
-		ui::icons::Icon::Serein,
+		ui::icons::Icon::RustCord,
 		mark.shrink(size * 0.24),
 		p.accent_text,
 	);
