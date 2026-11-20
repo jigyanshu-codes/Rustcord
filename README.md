@@ -67,9 +67,10 @@ Official pre-compiled binaries are published on [GitHub Releases (v0.1.0)](https
 - **[Direct Download: Windows Portable (.zip)](https://github.com/jigyanshu-codes/Rustcord/releases/download/v0.1.0/rustcord-v0.1.0-windows-x86_64.zip)** &mdash; Extract and run `rustcord.exe` directly.
 - **Installer (`Setup.exe`)**: Installs to `%LOCALAPPDATA%\Programs\RustCord`, configures Start Menu shortcuts and native toast notifications.
 
-### <img src="https://img.shields.io/badge/macOS-000000?style=flat-square&logo=apple&logoColor=white" height="18" /> macOS (Apple Silicon / ARM64)
+### <img src="https://img.shields.io/badge/macOS-000000?style=flat-square&logo=apple&logoColor=white" height="18" /> macOS (Apple Silicon & Intel)
 
-- Standalone `.app` bundle available under [Releases](https://github.com/jigyanshu-codes/Rustcord/releases).
+- **[Download macOS Universal Bundle (.zip)](https://github.com/jigyanshu-codes/Rustcord/releases/tag/v0.1.0)** &mdash; Native Universal 2 application (`RustCord.app`) supporting both **Intel (x86_64)** and **Apple Silicon (M1/M2/M3/M4 / ARM64)** Macs.
+- Standalone Intel-only (`x86_64`) and Apple Silicon (`arm64`) archives also provided under [Releases](https://github.com/jigyanshu-codes/Rustcord/releases/tag/v0.1.0).
 
 ---
 

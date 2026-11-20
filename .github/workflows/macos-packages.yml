@@ -1,0 +1,114 @@
+name: macOS Packages
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - 'crates/**'
+      - 'apps/**'
+      - 'packaging/macos/**'
+      - '.github/workflows/macos-packages.yml'
+      - 'Cargo.toml'
+      - 'Cargo.lock'
+
+permissions:
+  contents: write
+
+jobs:
+  macos-universal:
+    runs-on: macos-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v7.0.1
+
+      - uses: dtolnay/rust-toolchain@1.99.1
+        with:
+          targets: x86_64-apple-darwin, aarch64-apple-darwin
+
+      - name: Install build tooling
+        run: brew install nasm cmake
+
+      - name: Build Intel x86_64 binary
+        run: |
+          cargo build --release --locked -p rustcord --bin rustcord --no-default-features --target x86_64-apple-darwin
+
+      - name: Build Apple Silicon aarch64 binary
+        run: |
+          cargo build --release --locked -p rustcord --bin rustcord --no-default-features --target aarch64-apple-darwin
+
+      - name: Create Universal 2 binary with lipo
+        run: |
+          mkdir -p target/universal
+          lipo -create \
+            target/x86_64-apple-darwin/release/rustcord \
+            target/aarch64-apple-darwin/release/rustcord \
+            -output target/universal/rustcord
+          echo "Verifying Universal binary architectures:"
+          lipo -info target/universal/rustcord
+
+      - name: Package macOS bundles
+        run: |
+          mkdir -p dist/packages
+
+          package_bundle() {
+            local arch_name="$1"
+            local bin_path="$2"
+            local root_dir="dist/RustCord-$arch_name"
+            local bundle="$root_dir/RustCord.app"
+
+            mkdir -p "$bundle/Contents/MacOS"
+            mkdir -p "$bundle/Contents/Resources/licenses"
+
+            cp "$bin_path" "$bundle/Contents/MacOS/rustcord"
+            chmod +x "$bundle/Contents/MacOS/rustcord"
+            cp packaging/macos/Info.plist "$bundle/Contents/Info.plist"
+
+            sh packaging/macos/compile-icon.sh "$bundle/Contents/Resources"
+            if [ -f packaging/macos/RustCord.icns ]; then
+              cp packaging/macos/RustCord.icns "$bundle/Contents/Resources/RustCord.icns"
+            fi
+            cp README.md LICENSE-MIT LICENSE-APACHE "$bundle/Contents/Resources/"
+            if [ -f assets/sounds/README.md ]; then
+              cp assets/sounds/README.md "$bundle/Contents/Resources/licenses/notification-sounds.md"
+            fi
+
+            # Ad-hoc signature
+            codesign --force --deep --sign - "$bundle"
+            codesign --verify --deep --strict "$bundle"
+
+            # Create zip archive preserving macOS resource forks
+            (cd "$root_dir" && ditto -c -k --sequesterRsrc --keepParent "RustCord.app" "../../dist/packages/rustcord-v0.1.0-macos-$arch_name.zip")
+          }
+
+          echo "Packaging Universal bundle..."
+          package_bundle "universal" "target/universal/rustcord"
+
+          echo "Packaging Intel x64 bundle..."
+          package_bundle "intel-x64" "target/x86_64-apple-darwin/release/rustcord"
+
+          echo "Packaging Apple Silicon ARM64 bundle..."
+          package_bundle "arm64" "target/aarch64-apple-darwin/release/rustcord"
+
+          ls -lh dist/packages/
+
+      - uses: actions/upload-artifact@v7.0.1
+        with:
+          name: rustcord-macos-packages
+          path: dist/packages/*
+          if-no-files-found: error
+          retention-days: 14
+
+      - name: Publish to GitHub Releases
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          TAG="v0.1.0"
+          if gh release view "$TAG" >/dev/null 2>&1; then
+            gh release upload "$TAG" dist/packages/* --clobber
+          else
+            gh release create "$TAG" dist/packages/* \
+              --title "RustCord $TAG" \
+              --notes "Official native packages for RustCord."
+          fi

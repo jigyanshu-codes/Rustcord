@@ -10,4 +10,5 @@ xcrun actool packaging/macos/Serein.icon \
   --minimum-deployment-target 13.0 --app-icon Serein \
   --output-partial-info-plist "$resources/icon-info.plist"
 cp packaging/macos/Serein.icns "$resources/Serein.icns"
+test -f packaging/macos/RustCord.icns && cp packaging/macos/RustCord.icns "$resources/RustCord.icns"
 rm "$resources/icon-info.plist"
