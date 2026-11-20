@@ -83,23 +83,23 @@ pub(super) fn linux_package_manager_update_command() -> Option<&'static str> {
 			|| id_like.contains("debian")
 			|| id_like.contains("ubuntu")
 		{
-			return Some("sudo apt update && sudo apt install --only-upgrade serein");
+			return Some("sudo apt update && sudo apt install --only-upgrade rustcord");
 		}
 		if id == "arch" || id == "manjaro" || id == "endeavouros" || id_like.contains("arch") {
-			return Some("sudo pacman -Syu serein");
+			return Some("sudo pacman -Syu rustcord");
 		}
 		if id.contains("suse") || id_like.contains("suse") {
-			return Some("sudo zypper update serein");
+			return Some("sudo zypper update rustcord");
 		}
 	}
 	if Path::new("/usr/bin/dnf").is_file() {
-		Some("sudo dnf upgrade serein")
+		Some("sudo dnf upgrade rustcord")
 	} else if Path::new("/usr/bin/apt").is_file() {
-		Some("sudo apt update && sudo apt install --only-upgrade serein")
+		Some("sudo apt update && sudo apt install --only-upgrade rustcord")
 	} else if Path::new("/usr/bin/pacman").is_file() {
-		Some("sudo pacman -Syu serein")
+		Some("sudo pacman -Syu rustcord")
 	} else if Path::new("/usr/bin/zypper").is_file() {
-		Some("sudo zypper update serein")
+		Some("sudo zypper update rustcord")
 	} else {
 		None
 	}
@@ -145,7 +145,7 @@ fn installation() -> Result<PathBuf, String> {
 				);
 			}
 			return Err(
-				"Use your package manager to update Serein, or run a release AppImage.".into(),
+				"Use your package manager to update RustCord, or run a release AppImage.".into(),
 			);
 		}
 		let appdir = PathBuf::from(std::env::var_os("APPDIR").ok_or("Missing AppImage mount.")?);
@@ -153,7 +153,7 @@ fn installation() -> Result<PathBuf, String> {
 			.ok()
 			.as_ref() != Some(&exe)
 		{
-			return Err("Run Serein from its AppImage to install updates.".into());
+			return Err("Run RustCord from its AppImage to install updates.".into());
 		}
 		let image = PathBuf::from(std::env::var_os("APPIMAGE").ok_or("Missing AppImage path.")?);
 		let image = fs::canonicalize(image).map_err(|_| "Cannot locate the installed AppImage.")?;
@@ -232,7 +232,7 @@ pub(super) fn create_stage() -> Result<Staged, String> {
 		.open(&lock_path)
 		.map_err(|_| "The installation folder is not writable.".to_owned())?;
 	lock.try_lock()
-		.map_err(|_| "Another Serein instance is preparing update storage.".to_owned())?;
+		.map_err(|_| "Another RustCord instance is preparing update storage.".to_owned())?;
 	// One bounded staging directory per installation; discard leftovers only after their owner exits.
 	let mut count = 0;
 	for entry in
@@ -240,7 +240,7 @@ pub(super) fn create_stage() -> Result<Staged, String> {
 	{
 		count += 1;
 		if count > 16_384 {
-			return Err("The installation folder contains too many entries. Move Serein into its own folder.".into());
+			return Err("The installation folder contains too many entries. Move RustCord into its own folder.".into());
 		}
 		let entry = entry.map_err(|_| "Cannot inspect update storage.".to_owned())?;
 		let name = entry.file_name();
@@ -266,7 +266,7 @@ pub(super) fn create_stage() -> Result<Staged, String> {
 			.is_some_and(process_alive);
 		if helper_alive || (pid != std::process::id() && process_alive(pid)) {
 			return Err(
-				"Another Serein instance is preparing an update. Close it and try again.".into(),
+				"Another RustCord instance is preparing an update. Close it and try again.".into(),
 			);
 		}
 		if fs::read(entry.path().join("owner")).ok().as_deref() != Some(b"serein-updater-v1") {
@@ -303,7 +303,7 @@ pub(super) fn create_stage() -> Result<Staged, String> {
 		use std::os::unix::fs::DirBuilderExt;
 		builder.mode(0o700);
 	}
-	builder.create(&directory).map_err(|_| "The installation folder is not writable. Move Serein to a writable folder and try again.".to_owned())?;
+	builder.create(&directory).map_err(|_| "The installation folder is not writable. Move RustCord to a writable folder and try again.".to_owned())?;
 	fs::write(directory.join("owner"), b"serein-updater-v1")
 		.map_err(|_| "Cannot mark update storage ownership.".to_owned())?;
 	Ok(Staged {
