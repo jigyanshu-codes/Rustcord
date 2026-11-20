@@ -110,9 +110,9 @@ impl MenuState {
 		if !rows.is_empty() {
 			rows.push(Row::Separator);
 		}
-		rows.push(action("Show Serein", Event::Show));
+		rows.push(action("Show RustCord", Event::Show));
 		#[cfg(target_os = "linux")]
-		rows.push(action("Minimize Serein", Event::Minimize));
+		rows.push(action("Minimize RustCord", Event::Minimize));
 		rows.push(Row::Separator);
 		rows.push(Row::Action {
 			label: "Mute",
@@ -134,7 +134,7 @@ impl MenuState {
 			enabled: self.call.is_some(),
 		});
 		rows.push(Row::Separator);
-		rows.push(action("Quit Serein", Event::Quit));
+		rows.push(action("Quit RustCord", Event::Quit));
 		rows
 	}
 }
@@ -350,7 +350,7 @@ mod native {
 				},
 				..Default::default()
 			};
-			for (slot, unit) in data.szTip.iter_mut().zip("Serein".encode_utf16()) {
+			for (slot, unit) in data.szTip.iter_mut().zip("RustCord".encode_utf16()) {
 				*slot = unit;
 			}
 			let tray = Self {
@@ -444,10 +444,10 @@ mod native {
 
 	fn voice_state_tip(state: super::VoiceState) -> &'static str {
 		match state {
-			super::VoiceState::Unmuted => "Serein",
-			super::VoiceState::Speaking => "Serein (Speaking)",
-			super::VoiceState::Muted => "Serein (Muted)",
-			super::VoiceState::Deafened => "Serein (Deafened)",
+			super::VoiceState::Unmuted => "RustCord",
+			super::VoiceState::Speaking => "RustCord (Speaking)",
+			super::VoiceState::Muted => "RustCord (Muted)",
+			super::VoiceState::Deafened => "RustCord (Deafened)",
 		}
 	}
 

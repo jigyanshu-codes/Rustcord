@@ -1,15 +1,18 @@
-# Run explicitly after extracting Serein to its final folder. No administrator rights required.
-# Creates only the current user's Serein Start Menu shortcut; does not enable OS alerts in Serein.
+# Run explicitly after extracting RustCord to its final folder. No administrator rights required.
+# Creates only the current user's RustCord Start Menu shortcut; does not enable OS alerts in RustCord.
 param([switch]$Remove, [switch]$Force)
 $ErrorActionPreference = 'Stop'
-$shortcut = Join-Path ([Environment]::GetFolderPath('Programs')) 'Serein.lnk'
+$shortcut = Join-Path ([Environment]::GetFolderPath('Programs')) 'RustCord.lnk'
 if ($Remove) {
     if (Test-Path -LiteralPath $shortcut) { Remove-Item -LiteralPath $shortcut }
     return
 }
-$executable = Join-Path $PSScriptRoot 'serein.exe'
-if (!(Test-Path -LiteralPath $executable)) { throw 'Keep this script next to serein.exe in its final folder.' }
-if ((Test-Path -LiteralPath $shortcut) -and !$Force) { throw 'Serein.lnk already exists. Remove it explicitly with -Remove before replacing it.' }
+$executable = Join-Path $PSScriptRoot 'rustcord.exe'
+if (!(Test-Path -LiteralPath $executable)) {
+    $executable = Join-Path $PSScriptRoot 'serein.exe'
+}
+if (!(Test-Path -LiteralPath $executable)) { throw 'Keep this script next to rustcord.exe in its final folder.' }
+if ((Test-Path -LiteralPath $shortcut) -and !$Force) { throw 'RustCord.lnk already exists. Remove it explicitly with -Remove before replacing it.' }
 if ($Force -and (Test-Path -LiteralPath $shortcut)) { Remove-Item -LiteralPath $shortcut -Force }
 
 # A desktop toast requires a Start Menu shortcut carrying the same AppUserModelID as the notifier.
@@ -17,7 +20,7 @@ if ($Force -and (Test-Path -LiteralPath $shortcut)) { Remove-Item -LiteralPath $
 Add-Type -TypeDefinition @'
 using System;
 using System.Runtime.InteropServices;
-public static class SereinShortcut {
+public static class RustCordShortcut {
     [StructLayout(LayoutKind.Sequential)] struct PropertyKey {
         public Guid format; public uint id;
     }
@@ -42,7 +45,7 @@ public static class SereinShortcut {
         IPropertyStore store;
         SHGetPropertyStoreFromParsingName(path, IntPtr.Zero, 2, ref iid, out store);
         PropertyKey key = new PropertyKey { format = new Guid("9F4C2855-9F79-4B39-A8D0-E1D42DE1D5F3"), id = 5 };
-        PropVariant value = new PropVariant { type = 31, value = Marshal.StringToCoTaskMemUni("cz.viceverse.serein") };
+        PropVariant value = new PropVariant { type = 31, value = Marshal.StringToCoTaskMemUni("io.github.rustcord") };
         try { store.SetValue(ref key, ref value); store.Commit(); }
         finally { Marshal.FreeCoTaskMem(value.value); Marshal.FinalReleaseComObject(store); }
     }

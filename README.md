@@ -1,8 +1,8 @@
-# Serein
+# RustCord
 
 <p align="center">
-  <a href="https://github.com/ViceVerse-cz/Serein">
-    <img src="docs/preview.png" alt="Serein Native Discord Client" width="900" style="max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 20px rgba(0,0,0,0.3);" />
+  <a href="https://github.com/jigyanshu-codes/Rustcord">
+    <img src="docs/preview.png" alt="RustCord Native Discord Client" width="900" style="max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 20px rgba(0,0,0,0.3);" />
   </a>
 </p>
 
@@ -26,7 +26,7 @@
 
 <p align="center">
   <a href="https://discord.gg/UqTDGCENaN"><img src="https://img.shields.io/badge/Discord-Join%20our%20Discord%20server%20for%20updates-5865F2?logo=discord&logoColor=white" alt="Discord" /></a>
-  <a href="https://github.com/ViceVerse-cz/Serein/releases"><img src="https://img.shields.io/github/v/release/ViceVerse-cz/Serein?label=release&color=blue" alt="GitHub Release" /></a>
+  <a href="https://github.com/jigyanshu-codes/Rustcord/releases"><img src="https://img.shields.io/github/v/release/jigyanshu-codes/Rustcord?label=release&color=blue" alt="GitHub Release" /></a>
   <a href="Cargo.toml"><img src="https://img.shields.io/badge/rust-1.99.1_pinned-blue.svg?logo=rust" alt="Rust 1.99.1 Pinned" /></a>
   <a href="crates/ui"><img src="https://img.shields.io/badge/ui-egui%20%2F%20wgpu-orange.svg" alt="UI egui/wgpu" /></a>
   <a href="docs/platform-support.md"><img src="https://img.shields.io/badge/platform-macOS%20%7C%20Linux%20%7C%20Windows-informational.svg" alt="Platform Support" /></a>
@@ -37,13 +37,13 @@
 
 > [!WARNING]
 > **Unofficial and not endorsed by Discord.**
-> Serein communicates directly with Discord's public gateway and REST endpoints for your existing account. Automating normal accounts outside the official OAuth2/bot API violates Discord's Terms of Service and carries risk of account termination. Technical interoperability does not imply platform approval. Review the [compatibility matrix](docs/discord-compatibility.md) and [authentication guide](docs/authentication.md) before use.
+> RustCord communicates directly with Discord's public gateway and REST endpoints for your existing account. Automating normal accounts outside the official OAuth2/bot API violates Discord's Terms of Service and carries risk of account termination. Technical interoperability does not imply platform approval. Review the [compatibility matrix](docs/discord-compatibility.md) and [authentication guide](docs/authentication.md) before use.
 
 ---
 
 ## Downloads & Installation
 
-Pre-compiled releases for macOS, Linux, and Windows are published on GitHub [Releases](https://github.com/ViceVerse-cz/Serein/releases).
+Pre-compiled releases for macOS, Linux, and Windows are published on GitHub [Releases](https://github.com/jigyanshu-codes/Rustcord/releases).
 
 | Platform | Format | Architectures | Details |
 |---|---|---|---|
@@ -62,15 +62,15 @@ Flatpak is the recommended distribution format for Linux, featuring sandbox isol
 
 - **One-Click Repository Install (Automatic Updates)**:
   ```sh
-  flatpak install --user https://viceverse-cz.github.io/Serein/flatpak/serein.flatpakref
+  flatpak install --user https://viceverse-cz.github.io/RustCord/flatpak/serein.flatpakref
   ```
   Once installed, your desktop software store (GNOME Software, KDE Discover) or `flatpak update` will automatically discover and install updates.
 
 - **Standalone Offline Bundle**:
-  Download `Serein-linux.flatpak` from [Releases](https://github.com/ViceVerse-cz/Serein/releases):
+  Download `RustCord-linux.flatpak` from [Releases](https://github.com/jigyanshu-codes/Rustcord/releases):
   ```sh
-  flatpak install --user ./Serein-linux.flatpak
-  flatpak run cz.viceverse.serein
+  flatpak install --user ./RustCord-linux.flatpak
+  flatpak run io.github.rustcord
   ```
 
 See [Flatpak guide](packaging/flatpak/README.md) for sandbox permissions and source build details.
@@ -79,22 +79,22 @@ See [Flatpak guide](packaging/flatpak/README.md) for sandbox permissions and sou
 
 Configure the signed package repository for your distribution with one command:
 ```sh
-curl -fsSL https://viceverse-cz.github.io/Serein/setup.sh | sh
+curl -fsSL https://viceverse-cz.github.io/RustCord/setup.sh | sh
 ```
 The script detects your distribution (Ubuntu/Debian, Fedora, openSUSE, Arch Linux), cryptographically verifies the GPG signing key, and configures the repository with an option to install immediately.
 
-After setup, manage Serein with your native package manager:
+After setup, manage RustCord with your native package manager:
 ```sh
 # Ubuntu / Debian: sudo apt install serein
 # Fedora:          sudo dnf install serein
 # openSUSE:        sudo zypper install serein
 # Arch Linux:      sudo pacman -S serein
 ```
-Your normal system updates (`apt upgrade`, `dnf upgrade`, `zypper update`, `pacman -Syu`) will keep Serein updated. See [Signed package repositories](packaging/repositories/README.md) for manual GPG verification steps.
+Your normal system updates (`apt upgrade`, `dnf upgrade`, `zypper update`, `pacman -Syu`) will keep RustCord updated. See [Signed package repositories](packaging/repositories/README.md) for manual GPG verification steps.
 
 #### 3. Gentoo (source or binary)
 
-Gentoo users can install Serein from the [vitaly-zdanevich-overlay](https://github.com/vitaly-zdanevich/gentoo-overlay) overlay. It provides a source ebuild ([net-im/serein](https://github.com/vitaly-zdanevich/gentoo-overlay/tree/main/net-im/serein)) and a prebuilt amd64 ebuild ([net-im/serein-bin](https://github.com/vitaly-zdanevich/gentoo-overlay/tree/main/net-im/serein-bin)).
+Gentoo users can install RustCord from the [vitaly-zdanevich-overlay](https://github.com/vitaly-zdanevich/gentoo-overlay) overlay. It provides a source ebuild ([net-im/serein](https://github.com/vitaly-zdanevich/gentoo-overlay/tree/main/net-im/serein)) and a prebuilt amd64 ebuild ([net-im/serein-bin](https://github.com/vitaly-zdanevich/gentoo-overlay/tree/main/net-im/serein-bin)).
 
 ```sh
 sudo eselect repository add vitaly-zdanevich-overlay git https://github.com/vitaly-zdanevich/gentoo-overlay.git
@@ -107,13 +107,13 @@ Use `net-im/serein-bin` in the keyword file and emerge command to install the pr
 
 #### 4. Nix (flake)
 
-Nix installs are updated through Nix, not the in-app updater. On macOS the build produces an unsigned, non-notarized `Serein.app`. See the [Nix package guide](packaging/nix/README.md) for the development shell and details.
+Nix installs are updated through Nix, not the in-app updater. On macOS the build produces an unsigned, non-notarized `RustCord.app`. See the [Nix package guide](packaging/nix/README.md) for the development shell and details.
 
-The repository flake builds Serein from source for `x86_64-linux` and `aarch64-darwin`:
+The repository flake builds RustCord from source for `x86_64-linux` and `aarch64-darwin`:
 
 ```sh
-nix run github:ViceVerse-cz/Serein#serein
-nix profile install github:ViceVerse-cz/Serein#serein
+nix run github:jigyanshu-codes/Rustcord#serein
+nix profile install github:jigyanshu-codes/Rustcord#serein
 ```
 
 Or declaring it in the flake
@@ -130,7 +130,7 @@ Both modules below take `inputs` as an argument, so your flake must pass it thro
             inputs.nixpkgs.follows = "nixpkgs";
         };
         serein = {
-            url = "github:ViceVerse-cz/Serein";
+            url = "github:jigyanshu-codes/Rustcord";
             inputs.nixpkgs.follows = "nixpkgs";
         };
     };
@@ -200,7 +200,7 @@ If you use Home Manager as a NixOS module instead, pass `inputs` through its own
 
 #### 5. Standalone AppImage (Portable)
 
-Download `serein-<version>-Linux-X64.AppImage` from [Releases](https://github.com/ViceVerse-cz/Serein/releases), make it executable, and run:
+Download `serein-<version>-Linux-X64.AppImage` from [Releases](https://github.com/jigyanshu-codes/Rustcord/releases), make it executable, and run:
 ```sh
 chmod +x ./serein-*-Linux-X64.AppImage
 ./serein-*-Linux-X64.AppImage
@@ -213,9 +213,9 @@ Keep the AppImage in a writable directory to receive in-app updates via **Settin
 <summary><h3>🪟 Windows (Installer, PowerShell, Portable)</h3></summary>
 
 #### 1. Setup Installer (Recommended)
-Download the `Windows-X64-Setup.exe` or `Windows-ARM64-Setup.exe` asset for your system from [Releases](https://github.com/ViceVerse-cz/Serein/releases) and run it:
-- Installs per-user to `%LOCALAPPDATA%\Programs\Serein` without requiring administrator/UAC elevation.
-- Automatically registers Start Menu shortcuts and configures AppUserModelID (`cz.viceverse.serein`) for native Windows toast notifications.
+Download the `Windows-X64-Setup.exe` or `Windows-ARM64-Setup.exe` asset for your system from [Releases](https://github.com/jigyanshu-codes/Rustcord/releases) and run it:
+- Installs per-user to `%LOCALAPPDATA%\Programs\RustCord` without requiring administrator/UAC elevation.
+- Automatically registers Start Menu shortcuts and configures AppUserModelID (`io.github.rustcord`) for native Windows toast notifications.
 - Registers in Windows Settings (Installed Apps / Add or Remove Programs) with full uninstall support.
 - Fully compatible with in-app self-updates: updates automatically synchronize the registered version.
 
@@ -230,11 +230,11 @@ powershell -ExecutionPolicy Bypass -File .\setup.ps1 -Uninstall
 ```
 
 #### 3. Portable Archive
-Extract the `Windows-X64.zip` or `Windows-ARM64.zip` asset for your system anywhere and launch `serein.exe`. To enable native desktop notifications:
+Extract the `Windows-X64.zip` or `Windows-ARM64.zip` asset for your system anywhere and launch `rustcord.exe`. To enable native desktop notifications:
 ```powershell
 powershell -File .\install-notifications.ps1
 ```
-Run the script from the extracted folder beside `serein.exe`. If PowerShell's `RemoteSigned` policy blocks the downloaded script, review it and run `Unblock-File -LiteralPath .\install-notifications.ps1` in that folder before retrying. The Windows installer registers the shortcut automatically, so installed builds do not need this script.
+Run the script from the extracted folder beside `rustcord.exe`. If PowerShell's `RemoteSigned` policy blocks the downloaded script, review it and run `Unblock-File -LiteralPath .\install-notifications.ps1` in that folder before retrying. The Windows installer registers the shortcut automatically, so installed builds do not need this script.
 
 </details>
 
@@ -243,13 +243,13 @@ Run the script from the extracted folder beside `serein.exe`. If PowerShell's `R
 
 #### Homebrew Cask
 ```sh
-brew tap ViceVerse-cz/serein
+brew tap jigyanshu-codes/serein
 brew install --cask serein
 ```
-The cask lives in the small [`homebrew-serein`](https://github.com/ViceVerse-cz/homebrew-serein) tap, so installing does not clone this repository. If you tapped the old URL, run `brew untap ViceVerse-cz/serein` first and tap again.
+The cask lives in the small [`homebrew-serein`](https://github.com/jigyanshu-codes/homebrew-serein) tap, so installing does not clone this repository. If you tapped the old URL, run `brew untap jigyanshu-codes/serein` first and tap again.
 
 #### Standalone Bundle
-Download `serein-<version>-macOS-ARM64.zip` from [Releases](https://github.com/ViceVerse-cz/Serein/releases), unzip, and drag `Serein.app` to your `/Applications` folder.
+Download `serein-<version>-macOS-ARM64.zip` from [Releases](https://github.com/jigyanshu-codes/Rustcord/releases), unzip, and drag `RustCord.app` to your `/Applications` folder.
 
 </details>
 
@@ -291,17 +291,17 @@ Download `serein-<version>-macOS-ARM64.zip` from [Releases](https://github.com/V
 
 > **Testing Scenario:** Browsing channels while joined in a Voice Channel (VC) and streaming screen at 60 FPS on macOS.
 
-| Metric | Official Discord Client (Electron) | Serein (Native Rust + egui/wgpu) | Advantage |
+| Metric | Official Discord Client (Electron) | RustCord (Native Rust + egui/wgpu) | Advantage |
 |---|:---:|:---:|:---:|
 | **Memory (RAM)** | **1,178.4 MB** *(across 7 helper processes)* | **129.7 MB** *(single unified process)* | **~9× less memory (-89%)** |
 | **CPU Usage** | **22.8%** *(Renderer + Helper processes)* | **8.1%** | **~2.8× lower CPU (-64%)** |
 
-| Official Discord (Electron) | Serein (Native Rust) |
+| Official Discord (Electron) | RustCord (Native Rust) |
 | :---: | :---: |
 | **RAM: ~1,178.4 MB across 7 processes** | **RAM: 129.7 MB single process** |
-| <img src="docs/screenshots/perf-discord-ram.png" alt="Discord RAM Usage" width="450" /> | <img src="docs/screenshots/perf-serein-ram.png" alt="Serein RAM Usage" width="450" /> |
+| <img src="docs/screenshots/perf-discord-ram.png" alt="Discord RAM Usage" width="450" /> | <img src="docs/screenshots/perf-serein-ram.png" alt="RustCord RAM Usage" width="450" /> |
 | **CPU: 22.8% total** | **CPU: 8.1% total** |
-| <img src="docs/screenshots/perf-discord-cpu.png" alt="Discord CPU Usage" width="450" /> | <img src="docs/screenshots/perf-serein-cpu.png" alt="Serein CPU Usage" width="450" /> |
+| <img src="docs/screenshots/perf-discord-cpu.png" alt="Discord CPU Usage" width="450" /> | <img src="docs/screenshots/perf-serein-cpu.png" alt="RustCord CPU Usage" width="450" /> |
 
 ---
 
@@ -324,7 +324,7 @@ cargo run --locked
 ```
 
 Default source builds keep SQLite, image caches, extensions and game metadata in the OS-local
-`serein-development` directory, isolated from installed Serein data and safe from `cargo clean`.
+`serein-development` directory, isolated from installed RustCord data and safe from `cargo clean`.
 Set `SEREIN_DATA_DIR` to another absolute path when development copies need separate data roots;
 packaged builds use the normal `serein` directory when the variable is absent. Login tokens remain
 in the operating-system credential store under separate development and packaged-build entries.
@@ -371,7 +371,7 @@ cargo xtask package
 | **Profile Cards & Editing** | Implemented | On-demand profile popouts with banners, bios, badges, connections; native in-app editor for display name, bio, pronouns, and custom accent color with live preview |
 | **Server & Group Actions** | Implemented | Server dropdown with friend invites and leave server; group DM actions (edit name/icon preview, mute, leave) |
 | **Context Menus & Shortcuts** | Implemented | Right-click context menus for messages, media (save/copy), server channels, and members |
-| **Typing Indicators** | Implemented | Displays incoming typing with short expiry; Serein strictly avoids emitting outgoing typing signals |
+| **Typing Indicators** | Implemented | Displays incoming typing with short expiry; RustCord strictly avoids emitting outgoing typing signals |
 | **Persistence & Drafts** | Implemented | Bounded SQLite cache for history, drafts, settings, and diagnostics; OS credential store for auth tokens; sanitary logout |
 | **Internationalization** | Partial | Bundled Inter font, CJK and Arabic font fallbacks included; full IME and bidirectional editing unverified |
 
@@ -379,7 +379,7 @@ cargo xtask package
 
 ## Architecture Overview
 
-Serein is engineered as a clean multi-crate Cargo workspace, isolating UI rendering from networking, persistence, and service protocols:
+RustCord is engineered as a clean multi-crate Cargo workspace, isolating UI rendering from networking, persistence, and service protocols:
 
 ```
 serein/
@@ -409,7 +409,7 @@ serein/
 - **Token Protection:** Tokens use the native OS credential store by default (macOS Keychain, Windows Credential Manager, Linux Secret Service). An explicit Storage setting allows private, bounded plaintext files when OS saving fails; disabling it deletes those secret files. Active tokens remain redacted in memory.
 - **Local Cache Bounds:** SQLite databases store recent channel history, drafts, settings, diagnostics, and image preview metadata within bounded byte and count limits. The local SQLite store is **not** encrypted by the application.
 - **Sanitary Logout:** Executing an explicit logout destroys active network sessions, purges active secrets from memory, deletes the token from the OS credential store, and erases that account's local cache and drafts.
-- **Zero Telemetry:** Serein contains no analytics, telemetry, background crash collectors, or tracking beacons.
+- **Zero Telemetry:** RustCord contains no analytics, telemetry, background crash collectors, or tracking beacons.
 - **Platform Integrity:** No CAPTCHA/MFA bypasses, bot substitutions, token scrapers, or third-party relays. Every Discord connection presents one consistent browser identity matching the platform webview (unofficial; see [authentication](docs/authentication.md)); it is not randomized or rotated to evade detection.
 
 For full details, review the [Storage Policy](docs/storage-policy.md) and [Threat Model](docs/threat-model.md).
@@ -427,7 +427,7 @@ For full details, review the [Storage Policy](docs/storage-policy.md) and [Threa
 - [Voice Architecture & Procedure](docs/voice.md)
 - [Design Tokens & UI Styling](docs/design.md)
 - [Extensions & Plugin Architecture](docs/extensions.md)
-- [Extension SDK Creator Wiki](https://github.com/ViceVerse-cz/Serein/wiki)
+- [Extension SDK Creator Wiki](https://github.com/jigyanshu-codes/Rustcord/wiki)
 - [SDK Examples and Offline Authoring Guide](examples/extensions/README.md)
 - [Theme API Specification](docs/theme-api.md)
 - [Threat Model & Security](docs/threat-model.md)
@@ -437,7 +437,7 @@ For full details, review the [Storage Policy](docs/storage-policy.md) and [Threa
 
 ## License
 
-Original Serein code is dual-licensed under either:
+Original RustCord code is dual-licensed under either:
 - **MIT License** ([LICENSE-MIT](LICENSE-MIT))
 - **Apache License, Version 2.0** ([LICENSE-APACHE](LICENSE-APACHE))
 

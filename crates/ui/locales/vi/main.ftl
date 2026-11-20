@@ -1,9 +1,9 @@
-# Bản dịch tiếng Việt ứng dụng Serein (Vietnamese application translations)
+# Bản dịch tiếng Việt ứng dụng RustCord (Vietnamese application translations)
 
 language-system = Hệ thống
 language-group = Ngôn ngữ
 language-label = Ngôn ngữ hiển thị
-language-description = Chọn ngôn ngữ của Serein. Nội dung Discord không được dịch.
+language-description = Chọn ngôn ngữ của RustCord. Nội dung Discord không được dịch.
 section-user = Cài đặt người dùng
 section-app = Cài đặt ứng dụng
 section-customization = Tùy chỉnh
@@ -28,11 +28,11 @@ description-appearance = Chủ đề, màu sắc, hiệu ứng cửa sổ và b�
 description-chat = Cách hoạt động của tin nhắn, phương tiện, liên kết và thao tác cuộn.
 description-messaging-permissions = Kiểm soát ai có thể liên hệ với bạn và cách lọc tin nhắn.
 description-notifications = Chọn thông báo bạn nhận được và cách chúng xuất hiện.
-description-registered-games = Chia sẻ những gì bạn chơi và sửa hoặc thêm các trò chơi mà Serein phát hiện.
+description-registered-games = Chia sẻ những gì bạn chơi và sửa hoặc thêm các trò chơi mà RustCord phát hiện.
 description-voice = Xử lý micro, loa, camera và giọng nói.
-description-keybinds = Phím tắt cho Serein.
-description-storage = Serein lưu giữ những gì trên thiết bị này.
-description-updates = Luôn cập nhật Serein trên thiết bị này.
+description-keybinds = Phím tắt cho RustCord.
+description-storage = RustCord lưu giữ những gì trên thiết bị này.
+description-updates = Luôn cập nhật RustCord trên thiết bị này.
 description-extensions = Quản lý plugin cộng đồng.
 description-themes = Chọn một chủ đề cộng đồng.
 theme-maker = Tạo chủ đề giao diện
@@ -45,42 +45,42 @@ log-out = Đăng xuất
 unofficial = Không chính thức · không được Discord chứng thực
 offline-preview = Xem trước ngoại tuyến · các thay đổi vẫn còn trong phiên này và không bao giờ được gửi.
 general-startup = Khởi động
-general-open-at-startup = Mở Serein khi máy tính của bạn khởi động
-general-open-at-startup-description = Serein đăng nhập và kết nối ở chế độ nền.
+general-open-at-startup = Mở RustCord khi máy tính của bạn khởi động
+general-open-at-startup-description = RustCord đăng nhập và kết nối ở chế độ nền.
 general-start-minimized = Bắt đầu thu nhỏ
 general-start-minimized-description = Bắt đầu ở chế độ nền, tránh xa bạn.
 general-startup-unavailable = Tự động khởi động có sẵn trên Windows và macOS.
 general-window = Cửa sổ
 general-hide-decorations = Không có thanh tiêu đề
-general-hide-decorations-description = Đối với trình quản lý cửa sổ xếp kề: xóa mọi thanh tiêu đề và đường viền, bao gồm cả thanh tiêu đề và đường viền của Serein. Di chuyển, thay đổi kích thước và đóng Serein bằng trình quản lý cửa sổ của bạn.
+general-hide-decorations-description = Đối với trình quản lý cửa sổ xếp kề: xóa mọi thanh tiêu đề và đường viền, bao gồm cả thanh tiêu đề và đường viền của RustCord. Di chuyển, thay đổi kích thước và đóng RustCord bằng trình quản lý cửa sổ của bạn.
 general-custom-title-bar = Thanh tiêu đề tùy chỉnh
-general-custom-title-bar-description = Thay thế thanh tiêu đề hệ thống bằng thanh tiêu đề kiểu GTK 4 của riêng Serein.
-general-hide-title-bar = Ẩn thanh tiêu đề Serein
+general-custom-title-bar-description = Thay thế thanh tiêu đề hệ thống bằng thanh tiêu đề kiểu GTK 4 của riêng RustCord.
+general-hide-title-bar = Ẩn thanh tiêu đề RustCord
 general-hide-title-bar-description = Thay vào đó hãy sử dụng thanh tiêu đề hệ thống và các nút cửa sổ.
-general-keep-menu-bar = Giữ Serein trong thanh menu
-general-keep-system-tray = Giữ Serein trong khay hệ thống
-general-menu-bar-description = Đóng cửa sổ vẫn giữ Serein ở thanh menu. Thoát khỏi menu của nó để thoát.
-general-linux-tray-description = Việc đóng giúp Serein tiếp tục chạy. Sử dụng khay để hiển thị, thu nhỏ hoặc thoát.
-general-windows-tray-description = Đóng cửa sổ sẽ giữ Serein ở vùng thông báo. Thoát khỏi menu của nó để thoát.
+general-keep-menu-bar = Giữ RustCord trong thanh menu
+general-keep-system-tray = Giữ RustCord trong khay hệ thống
+general-menu-bar-description = Đóng cửa sổ vẫn giữ RustCord ở thanh menu. Thoát khỏi menu của nó để thoát.
+general-linux-tray-description = Việc đóng giúp RustCord tiếp tục chạy. Sử dụng khay để hiển thị, thu nhỏ hoặc thoát.
+general-windows-tray-description = Đóng cửa sổ sẽ giữ RustCord ở vùng thông báo. Thoát khỏi menu của nó để thoát.
 general-tray-unavailable = Khay không có sẵn trên nền tảng này.
 general-graphics = đồ họa
 general-render-with = Kết xuất với
 general-graphics-api = API đồ họa
-general-graphics-api-description = Có hiệu lực sau khi khởi động lại Serein. Sử dụng Tự động nếu API đã chọn không thể vẽ cửa sổ này.
+general-graphics-api-description = Có hiệu lực sau khi khởi động lại RustCord. Sử dụng Tự động nếu API đã chọn không thể vẽ cửa sổ này.
 general-graphics-api-env-override = WGPU_BACKEND kiểm soát API cho lần ra mắt này. Hãy xóa ghi đè môi trường đó để sử dụng cài đặt này.
-general-gpu-restart = Có hiệu lực vào lần tiếp theo Serein bắt đầu.
+general-gpu-restart = Có hiệu lực vào lần tiếp theo RustCord bắt đầu.
 general-gpu-current-prefix = Hiện đang vẽ bằng
 general-steady-refresh-rate = Tốc độ làm mới ổn định
-general-steady-refresh-rate-description = Mặc dù Serein là cửa sổ đang hoạt động, hãy vẽ ở tốc độ làm mới của màn hình để màn hình có tốc độ làm mới thay đổi (VRR, G-SYNC, FreeSync) có thể giữ một tốc độ thay vì nhấp nháy. Sử dụng nhiều năng lượng hơn.
+general-steady-refresh-rate-description = Mặc dù RustCord là cửa sổ đang hoạt động, hãy vẽ ở tốc độ làm mới của màn hình để màn hình có tốc độ làm mới thay đổi (VRR, G-SYNC, FreeSync) có thể giữ một tốc độ thay vì nhấp nháy. Sử dụng nhiều năng lượng hơn.
 steady-refresh-prompt-title = Đã phát hiện thấy màn hình G-SYNC
-steady-refresh-prompt-body = Serein chỉ vẽ lại khi có gì đó thay đổi, điều này có thể làm cho màn hình G-SYNC nhấp nháy trong khi Serein là cửa sổ đang hoạt động. Tốc độ làm mới ổn định sẽ tránh điều đó bằng cách vẽ ở tốc độ làm mới của màn hình và sử dụng nhiều năng lượng hơn. Bật nó lên?
+steady-refresh-prompt-body = RustCord chỉ vẽ lại khi có gì đó thay đổi, điều này có thể làm cho màn hình G-SYNC nhấp nháy trong khi RustCord là cửa sổ đang hoạt động. Tốc độ làm mới ổn định sẽ tránh điều đó bằng cách vẽ ở tốc độ làm mới của màn hình và sử dụng nhiều năng lượng hơn. Bật nó lên?
 steady-refresh-prompt-turn-on = Bật
 steady-refresh-prompt-keep-off = Không, cảm ơn
 steady-refresh-prompt-settings = Thay đổi nó sau trong Cài đặt > { $page } > { $group }.
 gpu-automatic = tự động
 gpu-high-performance = Hiệu suất cao
 gpu-power-saving = Tiết kiệm điện
-gpu-automatic-description = Hãy để Serein chọn GPU có thể vẽ được cửa sổ này.
+gpu-automatic-description = Hãy để RustCord chọn GPU có thể vẽ được cửa sổ này.
 gpu-high-performance-description = Sử dụng card đồ họa rời khi có sẵn.
 gpu-power-saving-description = Sử dụng đồ họa tích hợp để tiết kiệm pin.
 direct-messages = Tin nhắn trực tiếp
@@ -224,7 +224,7 @@ account-menu-custom-status-editor-clear-after = Xóa sau
 # Context: custom_status_editor
 account-menu-custom-status-editor-no-custom-status = Không có trạng thái tùy chỉnh
 # Context: custom_status_editor
-account-menu-custom-status-editor-serein-clears-it = Serein xóa nó
+account-menu-custom-status-editor-serein-clears-it = RustCord xóa nó
 # Context: custom_status_editor
 account-menu-custom-status-editor-status-text = Văn bản trạng thái
 # Context: custom_status_editor
@@ -1111,7 +1111,7 @@ fonts-show-none-installed = Không tìm thấy phông chữ nào được cài �
 # Context: show
 fonts-show-the-quick-brown-fox-jumps-over-the-lazy-dog-0123456789 = Con cáo nâu nhanh nhẹn nhảy qua con chó lười. 0123456789
 # Context: show
-fonts-show-ttf-or-otf-up-to-32-mib-saved-on-this = Phông chữ được cài đặt trên thiết bị này, tối đa 32 MiB. Một bản sao được lưu cho Serein. Mã giữ phông chữ đơn cách của nó.
+fonts-show-ttf-or-otf-up-to-32-mib-saved-on-this = Phông chữ được cài đặt trên thiết bị này, tối đa 32 MiB. Một bản sao được lưu cho RustCord. Mã giữ phông chữ đơn cách của nó.
 # Context: show
 fonts-show-typography = kiểu chữ
 
@@ -1634,7 +1634,7 @@ keybinds-show-voice-enable-global-keybinds = Kích hoạt tổ hợp phím chung
 # Context: show_voice
 keybinds-show-voice-global-availability = Tính khả dụng toàn cầu
 # Context: show_voice
-keybinds-show-voice-use-voice-shortcuts-while-another-app-is-focused-when-off = Sử dụng phím tắt bằng giọng nói trong khi ứng dụng khác đang được tập trung. Khi tắt, các phím tắt chỉ hoạt động khi Serein đang tập trung.
+keybinds-show-voice-use-voice-shortcuts-while-another-app-is-focused-when-off = Sử dụng phím tắt bằng giọng nói trong khi ứng dụng khác đang được tập trung. Khi tắt, các phím tắt chỉ hoạt động khi RustCord đang tập trung.
 
 ## crates/ui/src/lib.rs
 # Context: account_card
@@ -1712,7 +1712,7 @@ main-restoring-checking-your-saved-login = Kiểm tra thông tin đăng nhập �
 # Context: restoring
 main-restoring-connecting-to-discord = Kết nối với Discord
 # Context: restoring_screen
-main-restoring-screen-serein = Serein
+main-restoring-screen-serein = RustCord
 # Context: restoring_screen
 main-restoring-screen-use-a-different-account = Sử dụng một tài khoản khác
 # Context: restoring_screen
@@ -1722,11 +1722,11 @@ main-sign-in-accounts-saved-accounts = Tài khoản đã lưu
 # Context: sign_in_consent
 main-sign-in-consent-passwords-and-2fa-stay-on-discord-s-own-login-page = Mật khẩu và 2FA vẫn ở trên trang đăng nhập của Discord. Chỉ mã thông báo phiên được lưu giữ trong kho thông tin xác thực hệ điều hành của bạn.
 # Context: sign_in_disclosures
-main-sign-in-disclosures-about-serein = Về Serein
+main-sign-in-disclosures-about-serein = Về RustCord
 # Context: sign_in_disclosures
 main-sign-in-disclosures-connect-with-this-token = Kết nối với mã thông báo này
 # Context: sign_in_disclosures
-main-sign-in-disclosures-for-owners-who-already-hold-a-valid-discord-session-token = Dành cho chủ sở hữu đã giữ mã thông báo phiên Discord hợp lệ, chẳng hạn như từ một bản cài đặt Serein đã đăng nhập khác. Mật khẩu và 2FA không bao giờ được sử dụng ở đây; điều này bỏ qua hoàn toàn trang đăng nhập được lưu trữ của Discord.
+main-sign-in-disclosures-for-owners-who-already-hold-a-valid-discord-session-token = Dành cho chủ sở hữu đã giữ mã thông báo phiên Discord hợp lệ, chẳng hạn như từ một bản cài đặt RustCord đã đăng nhập khác. Mật khẩu và 2FA không bao giờ được sử dụng ở đây; điều này bỏ qua hoàn toàn trang đăng nhập được lưu trữ của Discord.
 # Context: sign_in_disclosures
 main-sign-in-disclosures-forget-saved-login = Quên thông tin đăng nhập đã lưu
 # Context: sign_in_disclosures
@@ -1740,7 +1740,7 @@ main-sign-in-header-sign-in-with-your-discord-account-to-get-started = Đăng nh
 # Context: sign_in_header
 main-sign-in-header-welcome-back = Chào mừng trở lại
 # Context: sign_in_header
-main-sign-in-header-welcome-to-serein = Chào mừng đến với Serein
+main-sign-in-header-welcome-to-serein = Chào mừng đến với RustCord
 # Context: sign_in_preview
 main-sign-in-status-copy-failure-details = Sao chép chi tiết lỗi
 main-sign-in-preview-explore-the-offline-preview = Khám phá bản xem trước ngoại tuyến
@@ -1749,7 +1749,7 @@ main-sign-in-preview-sample-conversations-no-discord-connection = Cuộc trò ch
 # Context: sign_in_screen
 main-sign-in-screen-independent-and-open-source-not-affiliated-with-discord = Nguồn mở và độc lập · Không liên kết với Discord
 # Context: sign_in_screen
-main-sign-in-screen-serein = Serein
+main-sign-in-screen-serein = RustCord
 # Context: ui
 main-ui-cancel = Hủy bỏ
 # Context: ui
@@ -2358,13 +2358,13 @@ screen-body-refresh = Làm mới
 # Context: body
 screen-body-screen-or-window = Màn hình hoặc cửa sổ
 # Context: body
-screen-body-send-what-your-mac-plays-along-with-the-screen-serein = Gửi những gì máy Mac của bạn phát cùng với màn hình. Âm thanh cuộc gọi của Serein bị bỏ qua.
+screen-body-send-what-your-mac-plays-along-with-the-screen-serein = Gửi những gì máy Mac của bạn phát cùng với màn hình. Âm thanh cuộc gọi của RustCord bị bỏ qua.
 # Context: body
-screen-body-share-sound-from-other-apps-even-when-sharing-one-window = Chia sẻ âm thanh từ các ứng dụng khác, ngay cả khi chia sẻ một cửa sổ. Âm thanh của Serein bị bỏ đi.
+screen-body-share-sound-from-other-apps-even-when-sharing-one-window = Chia sẻ âm thanh từ các ứng dụng khác, ngay cả khi chia sẻ một cửa sổ. Âm thanh của RustCord bị bỏ đi.
 # Context: body
 screen-body-share-system-audio = Chia sẻ âm thanh hệ thống
 # Context: body
-screen-body-share-the-shared-apps-sound-or-other-apps-for-a-screen = Chia sẻ âm thanh của ứng dụng được chia sẻ hoặc âm thanh của mọi ứng dụng khác khi chia sẻ màn hình. Âm thanh của Serein bị bỏ đi.
+screen-body-share-the-shared-apps-sound-or-other-apps-for-a-screen = Chia sẻ âm thanh của ứng dụng được chia sẻ hoặc âm thanh của mọi ứng dụng khác khi chia sẻ màn hình. Âm thanh của RustCord bị bỏ đi.
 # Context: body
 screen-body-show-cursor = Hiển thị con trỏ
 # Context: body
@@ -3521,7 +3521,7 @@ settings-activity-added-games = Trò chơi đã thêm
 # Context: activity_settings
 settings-activity-no-games-added = Không có trò chơi nào được thêm vào
 # Context: activity_settings
-settings-activity-hidden = Ẩn. Serein sẽ không phát hiện ra trò chơi này.
+settings-activity-hidden = Ẩn. RustCord sẽ không phát hiện ra trò chơi này.
 # Context: activity_settings
 settings-activity-detected = Được phát hiện tự động
 # Context: activity_settings
@@ -3543,7 +3543,7 @@ settings-activity-click-to-rename = Bấm để đổi tên
 # Context: activity_settings
 settings-activity-add-a-game = Thêm một trò chơi
 # Context: activity_settings
-settings-activity-choose-program = Chọn một chương trình đang chạy. Serein hiển thị nó dưới dạng trò chơi của bạn bất cứ khi nào nó chạy.
+settings-activity-choose-program = Chọn một chương trình đang chạy. RustCord hiển thị nó dưới dạng trò chơi của bạn bất cứ khi nào nó chạy.
 # Context: activity_settings
 settings-activity-search-programs = Tìm kiếm các chương trình đang chạy
 # Context: activity_settings
@@ -3571,7 +3571,7 @@ settings-appearance-settings-primary-color = Màu cơ bản
 # Context: appearance_settings
 settings-appearance-settings-reset = Đặt lại
 # Context: appearance_settings
-settings-appearance-settings-restart-serein-after-changing-this-themes-can-customize-effects-while = Khởi động lại Serein sau khi thay đổi điều này. Chủ đề có thể tùy chỉnh hiệu ứng khi được bật.
+settings-appearance-settings-restart-serein-after-changing-this-themes-can-customize-effects-while = Khởi động lại RustCord sau khi thay đổi điều này. Chủ đề có thể tùy chỉnh hiệu ứng khi được bật.
 # Context: appearance_settings
 settings-appearance-settings-the-active-theme-brings-its-own-accent-it-takes-over = Chủ đề đang hoạt động mang lại điểm nhấn riêng; nó sẽ tiếp quản trong khi chủ đề đang được sử dụng.
 # Context: appearance_settings
@@ -3608,11 +3608,11 @@ settings-storage-page-clear-cache = Xóa bộ nhớ đệm
 # Context: storage_page
 settings-storage-page-local-storage = Bộ nhớ cục bộ
 # Context: storage_page
-settings-storage-page-messages-and-drafts-are-cached-on-this-device-inside-bounded = Tin nhắn và bản nháp được lưu vào bộ nhớ đệm trên thiết bị này bên trong các tệp được giới hạn, tách biệt với tài khoản. Dữ liệu bộ đệm không được Serein mã hóa; mã thông báo đăng nhập đã lưu sử dụng kho thông tin xác thực của hệ điều hành.
+settings-storage-page-messages-and-drafts-are-cached-on-this-device-inside-bounded = Tin nhắn và bản nháp được lưu vào bộ nhớ đệm trên thiết bị này bên trong các tệp được giới hạn, tách biệt với tài khoản. Dữ liệu bộ đệm không được RustCord mã hóa; mã thông báo đăng nhập đã lưu sử dụng kho thông tin xác thực của hệ điều hành.
 # Context: storage_page
 settings-storage-page-removes-cached-messages-and-media-drafts-and-your-login-stay = Xóa tin nhắn và phương tiện được lưu trong bộ nhớ cache. Bản nháp và thời gian đăng nhập của bạn.
 # Context: storage_page
-settings-storage-page-serein-does-not-collect-telemetry-or-upload-diagnostics-discord-retains = Serein không thu thập dữ liệu đo từ xa hoặc tải lên chẩn đoán. Discord giữ lại dữ liệu phía dịch vụ theo chính sách riêng của mình.
+settings-storage-page-serein-does-not-collect-telemetry-or-upload-diagnostics-discord-retains = RustCord không thu thập dữ liệu đo từ xa hoặc tải lên chẩn đoán. Discord giữ lại dữ liệu phía dịch vụ theo chính sách riêng của mình.
 # Context: storage_page
 settings-storage-page-your-privacy = Quyền riêng tư của bạn
 # Context: cosmetic_settings
@@ -4072,7 +4072,7 @@ updates-update-settings-could-not-load-or-save-update-preferences-changes-may-no
 # Context: update_settings
 updates-update-settings-download-update = Tải xuống bản cập nhật
 # Context: update_settings
-updates-update-settings-download-updates-in-the-background-restart-when-you-are-ready = Tải xuống các bản cập nhật trong nền. Khởi động lại khi bạn đã sẵn sàng. Serein vẫn kiểm tra khi khởi động và định kỳ khi tính năng này tắt.
+updates-update-settings-download-updates-in-the-background-restart-when-you-are-ready = Tải xuống các bản cập nhật trong nền. Khởi động lại khi bạn đã sẵn sàng. RustCord vẫn kiểm tra khi khởi động và định kỳ khi tính năng này tắt.
 # Context: update_settings
 updates-update-settings-early-builds-with-the-newest-changes-nightly-releases-can-be = Bản dựng sớm với những thay đổi mới nhất. Bản phát hành hàng đêm có thể kém tin cậy hơn.
 # Context: update_settings
@@ -4098,7 +4098,7 @@ updates-update-settings-release-channel = Kênh phát hành
 # Context: update_settings
 updates-update-settings-restart-to-update = Khởi động lại để cập nhật
 # Context: update_settings
-updates-update-settings-serein-was-installed-via-your-distribution-run-this-in-a = Serein đã được cài đặt thông qua bản phân phối của bạn. Chạy cái này trong một thiết bị đầu cuối để cập nhật.
+updates-update-settings-serein-was-installed-via-your-distribution-run-this-in-a = RustCord đã được cài đặt thông qua bản phân phối của bạn. Chạy cái này trong một thiết bị đầu cuối để cập nhật.
 # Context: update_settings
 updates-update-settings-save-diagnostics = Lưu chẩn đoán
 # Context: update_settings
@@ -4120,7 +4120,7 @@ updates-update-settings-log-warnings = Lỗi và cảnh báo
 # Context: update_settings
 updates-update-settings-open-folder = Mở thư mục
 # Context: update_settings
-updates-update-settings-the-log-folder-could-not-be-written = Không thể ghi thư mục nhật ký. Hãy kiểm tra thư mục dữ liệu của Serein và thử lại.
+updates-update-settings-the-log-folder-could-not-be-written = Không thể ghi thư mục nhật ký. Hãy kiểm tra thư mục dữ liệu của RustCord và thử lại.
 # Context: update_settings
 updates-update-settings-timings-stages-and-failures-in-one-local-file-no-account-channel-or = Thời gian, giai đoạn và lỗi trong một tệp nhật ký cục bộ. Dữ liệu tài khoản, kênh, tin nhắn và thông tin xác thực không bao giờ được ghi và không có gì được tải lên.
 # Context: update_log
@@ -4188,7 +4188,7 @@ verification-show-verification-required = Yêu cầu xác minh
 # Context: show
 verification-show-verify = Xác minh
 # Context: show
-verification-show-safer-in-the-official-discord-app = Việc hoàn thành bước kiểm tra này trong ứng dụng Discord chính thức sẽ an toàn hơn. Discord có thể yêu cầu các tài khoản mới hơn xác minh số điện thoại sau khi kiểm tra được giải quyết trong Serein.
+verification-show-safer-in-the-official-discord-app = Việc hoàn thành bước kiểm tra này trong ứng dụng Discord chính thức sẽ an toàn hơn. Discord có thể yêu cầu các tài khoản mới hơn xác minh số điện thoại sau khi kiểm tra được giải quyết trong RustCord.
 # Context: show
 verification-show-open-discord = Mở Discord
 
@@ -4608,7 +4608,7 @@ onboarding-rules-heading = Quy tắc máy chủ
 # Context: rules
 onboarding-rules-review = Người điều hành sẽ xem xét những câu trả lời này trước khi bạn có thể trò chuyện.
 # Context: field
-onboarding-field-unsupported = Máy chủ này đặt câu hỏi Serein chưa thể hiển thị. Hoàn tất việc tham gia vào ứng dụng Discord.
+onboarding-field-unsupported = Máy chủ này đặt câu hỏi RustCord chưa thể hiển thị. Hoàn tất việc tham gia vào ứng dụng Discord.
 # Context: field
 onboarding-field-agree = Tôi đã đọc và đồng ý với nội quy
 
@@ -4648,7 +4648,7 @@ public-upload-host-catbox = Lên tới 200 MB (GIF 20 MB) · có thể bị xóa
 public-upload-host-litterbox = Lên tới 1 GB · tạm thời, xóa sau 72 giờ
 public-upload-over-limit = { $size } · vượt quá giới hạn tải lên Discord { $limit } của bạn
 public-upload-uploading = Đang tải lên { $host } · { $sent } của { $total }
-public-upload-privacy = Bất kỳ ai có liên kết đều có thể mở tệp này. Nó được tải lên không thay đổi, bao gồm siêu dữ liệu, bên ngoài Discord và Serein không thể xóa nó sau này.
+public-upload-privacy = Bất kỳ ai có liên kết đều có thể mở tệp này. Nó được tải lên không thay đổi, bao gồm siêu dữ liệu, bên ngoài Discord và RustCord không thể xóa nó sau này.
 public-upload-review = Chưa có gì được gửi. Thêm liên kết vào bản nháp của bạn hoặc sao chép nó, sau đó tự gửi.
 public-upload-return = Quay lại cuộc trò chuyện ban đầu để thêm liên kết của nó.
 public-upload-preparing = Đang chuẩn bị tải lên công khai…
@@ -4803,7 +4803,7 @@ reading-double-click-reaction = Phản ứng nhấp đúp
 
 ## crates/platform/src/app_menu.rs
 # Context: macos_menu_bar
-app-menu-about = Về Serein
+app-menu-about = Về RustCord
 # Context: macos_menu_bar
 app-menu-updates = Kiểm tra cập nhật…
 # Context: macos_menu_bar
@@ -4811,13 +4811,13 @@ app-menu-settings = Cài đặt…
 # Context: macos_menu_bar
 app-menu-services = Dịch vụ
 # Context: macos_menu_bar
-app-menu-hide = Ẩn Serein
+app-menu-hide = Ẩn RustCord
 # Context: macos_menu_bar
 app-menu-hide-others = Ẩn người khác
 # Context: macos_menu_bar
 app-menu-show-all = Hiển thị tất cả
 # Context: macos_menu_bar
-app-menu-quit = Thoát khỏi Serein
+app-menu-quit = Thoát khỏi RustCord
 # Context: macos_menu_bar
 app-menu-file = Tập tin
 # Context: macos_menu_bar
@@ -4859,7 +4859,7 @@ app-menu-bring-all-to-front = Đưa tất cả lên phía trước
 # Context: macos_menu_bar
 app-menu-help = Trợ giúp
 # Context: macos_menu_bar
-app-menu-github = Serein trên GitHub
+app-menu-github = RustCord trên GitHub
 # Context: macos_menu_bar
 app-menu-report-issue = Báo cáo sự cố…
 
@@ -5096,17 +5096,17 @@ new-message-cancel = Hủy bỏ
 setup-appearance-title = Biến nó thành của bạn
 setup-appearance-body = Chế độ và màu sắc áp dụng khi bạn chọn chúng
 setup-window-title = Nhìn qua cửa sổ
-setup-window-body = Hãy để màn hình của bạn hiển thị phía sau bảng điều khiển của Serein
+setup-window-body = Hãy để màn hình của bạn hiển thị phía sau bảng điều khiển của RustCord
 setup-window-transparency-description = Chủ đề có thể điều chỉnh hiệu ứng khi nó được bật.
-setup-window-restart = Serein cần khởi động lại trước khi bật hoặc tắt độ trong suốt. Sự lựa chọn của bạn bây giờ đã được lưu.
+setup-window-restart = RustCord cần khởi động lại trước khi bật hoặc tắt độ trong suốt. Sự lựa chọn của bạn bây giờ đã được lưu.
 setup-desktop-title = Trên máy tính để bàn của bạn
-setup-desktop-body = Serein có mở bằng máy tính của bạn, thanh tiêu đề và khay hay không
+setup-desktop-body = RustCord có mở bằng máy tính của bạn, thanh tiêu đề và khay hay không
 setup-profiles-title = Hồ sơ mỹ phẩm
 setup-profiles-body = Thiết bị này thu hút những gì về mọi người và tên của họ
 setup-chat-title = Cách trò chuyện đọc
 setup-chat-body = Kích thước văn bản, khoảng cách tin nhắn và đồng hồ trên mỗi tin nhắn
 setup-notifications-title = Điều gì đến với bạn
-setup-notifications-body = Serein làm gì khi có tin nhắn đến khi bạn đang ở nơi khác
+setup-notifications-body = RustCord làm gì khi có tin nhắn đến khi bạn đang ở nơi khác
 setup-notifications-desktop-description = Biểu ngữ cho tin nhắn trực tiếp và đề cập. Tinh chỉnh các máy chủ và kênh từ menu của chúng.
 setup-notifications-sounds = Âm thanh thông báo
 setup-notifications-sounds-description = Âm thanh tin nhắn, cuộc gọi và giọng nói. Chọn từng cái riêng lẻ trong Cài đặt.
@@ -5219,8 +5219,8 @@ native-login-qr-not-me = Không phải tôi, bắt đầu lại
 native-login-settings = Cài đặt
 native-login-more-token = Mã thông báo phiên
 native-login-more-web = Đăng nhập qua web
-native-login-token-detail = Dán mã thông báo phiên bạn đã có, ví dụ từ một bản cài đặt Serein khác.
-native-login-about-risk = Các ứng dụng không chính thức như Serein có thể khiến tài khoản Discord của bạn gặp rủi ro.
+native-login-token-detail = Dán mã thông báo phiên bạn đã có, ví dụ từ một bản cài đặt RustCord khác.
+native-login-about-risk = Các ứng dụng không chính thức như RustCord có thể khiến tài khoản Discord của bạn gặp rủi ro.
 native-login-about-storage = Tin nhắn và bản nháp được lưu đệm trên thiết bị này. Thông tin đăng nhập của bạn được giữ trong kho thông tin xác thực của hệ điều hành.
 native-login-web-detail = Mở trang đăng nhập của Discord trong một cửa sổ tạm thời. Cần cho khóa bảo mật và passkey.
 native-login-web-open = Mở trang đăng nhập của Discord

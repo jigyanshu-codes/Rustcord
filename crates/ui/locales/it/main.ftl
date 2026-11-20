@@ -3,7 +3,7 @@
 language-system = Sistema
 language-group = Lingua
 language-label = Lingua di visualizzazione
-language-description = Scegli la lingua di Serein. Il contenuto di Discord non viene mai tradotto.
+language-description = Scegli la lingua di RustCord. Il contenuto di Discord non viene mai tradotto.
 section-user = Impostazioni utente
 section-app = Impostazioni dell'app
 section-customization = Personalizzazione
@@ -28,11 +28,11 @@ description-appearance = Tema, colori, effetti delle finestre e layout.
 description-chat = Come si comportano i messaggi, i media, i collegamenti e lo scorrimento.
 description-messaging-permissions = Controlla chi può contattarti e come vengono filtrati i messaggi.
 description-notifications = Scegli quali notifiche ricevere e come appaiono.
-description-registered-games = Condividi a cosa giochi e correggi o aggiungi i giochi rilevati da Serein.
+description-registered-games = Condividi a cosa giochi e correggi o aggiungi i giochi rilevati da RustCord.
 description-voice = Microfono, altoparlanti, fotocamera ed elaborazione vocale.
-description-keybinds = Scorciatoie da tastiera per Serein.
-description-storage = Ciò che Serein conserva su questo dispositivo.
-description-updates = Mantieni aggiornato Serein su questo dispositivo.
+description-keybinds = Scorciatoie da tastiera per RustCord.
+description-storage = Ciò che RustCord conserva su questo dispositivo.
+description-updates = Mantieni aggiornato RustCord su questo dispositivo.
 description-extensions = Gestisci i plugin della community.
 description-themes = Scegli un tema comunitario.
 theme-maker = Creatore di temi
@@ -45,39 +45,39 @@ log-out = Esci
 unofficial = Non ufficiale · non approvato da Discord
 offline-preview = Anteprima offline · le modifiche rimangono in questa sessione e non vengono mai inviate.
 general-startup = Avvio
-general-open-at-startup = Apri Serein all'avvio del computer
-general-open-at-startup-description = Serein accede e si connette in background.
+general-open-at-startup = Apri RustCord all'avvio del computer
+general-open-at-startup-description = RustCord accede e si connette in background.
 general-start-minimized = Inizia minimizzato
 general-start-minimized-description = Inizia in background, fuori dai piedi.
 general-startup-unavailable = L'avvio automatico è disponibile su Windows e macOS.
 general-window = Finestra
 general-hide-decorations = Nessuna barra del titolo
-general-hide-decorations-description = Per i window manager a tiling: rimuove tutte le barre del titolo e i bordi, inclusa quella di Serein. Sposta, ridimensiona o chiudi Serein con il tuo window manager.
+general-hide-decorations-description = Per i window manager a tiling: rimuove tutte le barre del titolo e i bordi, inclusa quella di RustCord. Sposta, ridimensiona o chiudi RustCord con il tuo window manager.
 general-custom-title-bar = Barra del titolo personalizzata
-general-custom-title-bar-description = Sostituisce la barra del titolo del sistema con la barra di intestazione di Serein in stile GTK 4.
-general-hide-title-bar = Nascondi la barra del titolo Serein
+general-custom-title-bar-description = Sostituisce la barra del titolo del sistema con la barra di intestazione di RustCord in stile GTK 4.
+general-hide-title-bar = Nascondi la barra del titolo RustCord
 general-hide-title-bar-description = Utilizzare invece la barra del titolo del sistema e i pulsanti della finestra.
-general-keep-menu-bar = Mantieni Serein nella barra dei menu
-general-keep-system-tray = Mantieni Serein nella barra delle applicazioni
-general-menu-bar-description = Chiudendo la finestra si mantiene Serein nella barra dei menu. Esci dal suo menu per uscire.
-general-linux-tray-description = La chiusura mantiene Serein in funzione. Utilizza il vassoio per mostrare, ridurre a icona o uscire.
-general-windows-tray-description = La chiusura della finestra mantiene Serein nell'area di notifica. Esci dal suo menu per uscire.
+general-keep-menu-bar = Mantieni RustCord nella barra dei menu
+general-keep-system-tray = Mantieni RustCord nella barra delle applicazioni
+general-menu-bar-description = Chiudendo la finestra si mantiene RustCord nella barra dei menu. Esci dal suo menu per uscire.
+general-linux-tray-description = La chiusura mantiene RustCord in funzione. Utilizza il vassoio per mostrare, ridurre a icona o uscire.
+general-windows-tray-description = La chiusura della finestra mantiene RustCord nell'area di notifica. Esci dal suo menu per uscire.
 general-tray-unavailable = Il vassoio non è disponibile su questa piattaforma.
 general-graphics = Grafica
 general-render-with = Renderizzare con
-general-gpu-restart = Ha effetto al successivo avvio di Serein.
+general-gpu-restart = Ha effetto al successivo avvio di RustCord.
 general-gpu-current-prefix = Attualmente disegno con
 general-steady-refresh-rate = Frequenza di aggiornamento costante
-general-steady-refresh-rate-description = Finché Serein è la finestra attiva, disegna alla frequenza di aggiornamento del display, così i display a frequenza di aggiornamento variabile (VRR, G-SYNC, FreeSync) possono mantenere una sola frequenza invece di sfarfallare. Consuma più energia.
+general-steady-refresh-rate-description = Finché RustCord è la finestra attiva, disegna alla frequenza di aggiornamento del display, così i display a frequenza di aggiornamento variabile (VRR, G-SYNC, FreeSync) possono mantenere una sola frequenza invece di sfarfallare. Consuma più energia.
 steady-refresh-prompt-title = Rilevato display G-SYNC
-steady-refresh-prompt-body = Serein ridisegna solo quando qualcosa cambia, e questo può far sfarfallare un display G-SYNC finché Serein è la finestra attiva. La frequenza di aggiornamento costante lo evita disegnando alla frequenza di aggiornamento del display, ma consuma più energia. Attivarla?
+steady-refresh-prompt-body = RustCord ridisegna solo quando qualcosa cambia, e questo può far sfarfallare un display G-SYNC finché RustCord è la finestra attiva. La frequenza di aggiornamento costante lo evita disegnando alla frequenza di aggiornamento del display, ma consuma più energia. Attivarla?
 steady-refresh-prompt-turn-on = Attiva
 steady-refresh-prompt-keep-off = No, grazie
 steady-refresh-prompt-settings = Puoi cambiare questa scelta più tardi nelle impostazioni, in { $page } > { $group }.
 gpu-automatic = Automatico
 gpu-high-performance = Prestazioni elevate
 gpu-power-saving = Risparmio energetico
-gpu-automatic-description = Lascia che Serein scelga la GPU che può disegnare questa finestra.
+gpu-automatic-description = Lascia che RustCord scelga la GPU che può disegnare questa finestra.
 gpu-high-performance-description = Utilizzare la scheda grafica discreta quando disponibile.
 gpu-power-saving-description = Utilizza la grafica integrata per risparmiare batteria.
 direct-messages = Messaggi diretti
@@ -221,7 +221,7 @@ account-menu-custom-status-editor-clear-after = Cancella dopo
 # Context: custom_status_editor
 account-menu-custom-status-editor-no-custom-status = Nessuno stato personalizzato
 # Context: custom_status_editor
-account-menu-custom-status-editor-serein-clears-it = Serein lo cancella
+account-menu-custom-status-editor-serein-clears-it = RustCord lo cancella
 # Context: custom_status_editor
 account-menu-custom-status-editor-status-text = Testo dello stato
 # Context: custom_status_editor
@@ -1570,7 +1570,7 @@ keybinds-show-voice-enable-global-keybinds = Abilita le combinazioni di tasti gl
 # Context: show_voice
 keybinds-show-voice-global-availability = Disponibilità globale
 # Context: show_voice
-keybinds-show-voice-use-voice-shortcuts-while-another-app-is-focused-when-off = Utilizza le scorciatoie vocali mentre è attiva un'altra app. Quando sono disattivate, le scorciatoie funzionano solo mentre Serein è concentrato.
+keybinds-show-voice-use-voice-shortcuts-while-another-app-is-focused-when-off = Utilizza le scorciatoie vocali mentre è attiva un'altra app. Quando sono disattivate, le scorciatoie funzionano solo mentre RustCord è concentrato.
 
 ## crates/ui/src/lib.rs
 # Context: account_card
@@ -1656,7 +1656,7 @@ main-restoring-screen-welcome-back = Bentornato
 # Context: sign_in_accounts
 main-sign-in-accounts-saved-accounts = Account salvati
 # Context: sign_in_disclosures
-main-sign-in-disclosures-about-serein = A proposito di Serein
+main-sign-in-disclosures-about-serein = A proposito di RustCord
 # Context: sign_in_disclosures
 main-sign-in-disclosures-connect-with-this-token = Connettiti con questo token
 # Context: sign_in_disclosures
@@ -1670,7 +1670,7 @@ main-sign-in-header-sign-in-with-your-discord-account-to-get-started = Accedi co
 # Context: sign_in_header
 main-sign-in-header-welcome-back = Bentornato
 # Context: sign_in_header
-main-sign-in-header-welcome-to-serein = Benvenuti a Serein
+main-sign-in-header-welcome-to-serein = Benvenuti a RustCord
 # Context: sign_in_preview
 main-sign-in-status-copy-failure-details = Copia i dettagli dell’errore
 main-sign-in-preview-explore-the-offline-preview = Esplora l'anteprima offline
@@ -2278,13 +2278,13 @@ screen-body-refresh = Aggiorna
 # Context: body
 screen-body-screen-or-window = Schermo o finestra
 # Context: body
-screen-body-send-what-your-mac-plays-along-with-the-screen-serein = Invia ciò che il tuo Mac riproduce insieme allo schermo. L'audio della chiamata di Serein viene escluso.
+screen-body-send-what-your-mac-plays-along-with-the-screen-serein = Invia ciò che il tuo Mac riproduce insieme allo schermo. L'audio della chiamata di RustCord viene escluso.
 # Context: body
-screen-body-share-sound-from-other-apps-even-when-sharing-one-window = Condividi l'audio da altre app, anche quando condividi una finestra. L'audio di Serein è omesso.
+screen-body-share-sound-from-other-apps-even-when-sharing-one-window = Condividi l'audio da altre app, anche quando condividi una finestra. L'audio di RustCord è omesso.
 # Context: body
 screen-body-share-system-audio = Condividi l'audio del sistema
 # Context: body
-screen-body-share-the-shared-apps-sound-or-other-apps-for-a-screen = Condividi l'audio dell'app condivisa, o quello di tutte le altre app quando condividi uno schermo. L'audio di Serein viene escluso.
+screen-body-share-the-shared-apps-sound-or-other-apps-for-a-screen = Condividi l'audio dell'app condivisa, o quello di tutte le altre app quando condividi uno schermo. L'audio di RustCord viene escluso.
 # Context: body
 screen-body-show-cursor = Mostra cursore
 # Context: body
@@ -3441,7 +3441,7 @@ settings-activity-added-games = Giochi aggiunti
 # Context: activity_settings
 settings-activity-no-games-added = Nessun gioco aggiunto
 # Context: activity_settings
-settings-activity-hidden = Nascosto. Serein non rileverà questo gioco.
+settings-activity-hidden = Nascosto. RustCord non rileverà questo gioco.
 # Context: activity_settings
 settings-activity-detected = Rilevato automaticamente
 # Context: activity_settings
@@ -3463,7 +3463,7 @@ settings-activity-click-to-rename = Fai clic per rinominare
 # Context: activity_settings
 settings-activity-add-a-game = Aggiungi un gioco
 # Context: activity_settings
-settings-activity-choose-program = Scegli un programma in esecuzione. Serein lo mostrerà come tuo gioco ogni volta che è avviato.
+settings-activity-choose-program = Scegli un programma in esecuzione. RustCord lo mostrerà come tuo gioco ogni volta che è avviato.
 # Context: activity_settings
 settings-activity-search-programs = Cerca programmi in esecuzione
 # Context: activity_settings
@@ -3485,7 +3485,7 @@ settings-appearance-settings-primary-color = Colore primario
 # Context: appearance_settings
 settings-appearance-settings-reset = Reset
 # Context: appearance_settings
-settings-appearance-settings-restart-serein-after-changing-this-themes-can-customize-effects-while = Riavvia Serein dopo averlo modificato. I temi possono personalizzare gli effetti mentre sono abilitati.
+settings-appearance-settings-restart-serein-after-changing-this-themes-can-customize-effects-while = Riavvia RustCord dopo averlo modificato. I temi possono personalizzare gli effetti mentre sono abilitati.
 # Context: appearance_settings
 settings-appearance-settings-the-active-theme-brings-its-own-accent-it-takes-over = Il tema attivo porta il proprio accento; prende il sopravvento mentre il tema è in uso.
 # Context: appearance_settings
@@ -3522,11 +3522,11 @@ settings-storage-page-clear-cache = Svuota cache
 # Context: storage_page
 settings-storage-page-local-storage = Archiviazione locale
 # Context: storage_page
-settings-storage-page-messages-and-drafts-are-cached-on-this-device-inside-bounded = I messaggi e le bozze vengono memorizzati nella cache di questo dispositivo all'interno di file delimitati e isolati da un account. I dati della cache non sono crittografati da Serein; i token di accesso salvati utilizzano l'archivio credenziali del sistema operativo.
+settings-storage-page-messages-and-drafts-are-cached-on-this-device-inside-bounded = I messaggi e le bozze vengono memorizzati nella cache di questo dispositivo all'interno di file delimitati e isolati da un account. I dati della cache non sono crittografati da RustCord; i token di accesso salvati utilizzano l'archivio credenziali del sistema operativo.
 # Context: storage_page
 settings-storage-page-removes-cached-messages-and-media-drafts-and-your-login-stay = Rimuove i messaggi e i contenuti multimediali memorizzati nella cache. Le bozze e il tuo login rimangono.
 # Context: storage_page
-settings-storage-page-serein-does-not-collect-telemetry-or-upload-diagnostics-discord-retains = Serein non raccoglie dati di telemetria né carica dati diagnostici. Discord conserva i dati sul lato servizio secondo le proprie politiche.
+settings-storage-page-serein-does-not-collect-telemetry-or-upload-diagnostics-discord-retains = RustCord non raccoglie dati di telemetria né carica dati diagnostici. Discord conserva i dati sul lato servizio secondo le proprie politiche.
 # Context: storage_page
 settings-storage-page-your-privacy = La tua privacy
 # Context: cosmetic_settings
@@ -3985,7 +3985,7 @@ updates-update-settings-could-not-load-or-save-update-preferences-changes-may-no
 # Context: update_settings
 updates-update-settings-download-update = Scarica l'aggiornamento
 # Context: update_settings
-updates-update-settings-download-updates-in-the-background-restart-when-you-are-ready = Scarica gli aggiornamenti in background. Ricomincia quando sei pronto. Serein controlla ancora all'avvio e periodicamente quando è disattivato.
+updates-update-settings-download-updates-in-the-background-restart-when-you-are-ready = Scarica gli aggiornamenti in background. Ricomincia quando sei pronto. RustCord controlla ancora all'avvio e periodicamente quando è disattivato.
 # Context: update_settings
 updates-update-settings-early-builds-with-the-newest-changes-nightly-releases-can-be = Prime build con le modifiche più recenti. I rilasci notturni possono essere meno affidabili.
 # Context: update_settings
@@ -4011,7 +4011,7 @@ updates-update-settings-release-channel = Canale di rilascio
 # Context: update_settings
 updates-update-settings-restart-to-update = Riavvia per aggiornare
 # Context: update_settings
-updates-update-settings-serein-was-installed-via-your-distribution-run-this-in-a = Serein è stato installato tramite la tua distribuzione. Eseguilo in un terminale per aggiornare.
+updates-update-settings-serein-was-installed-via-your-distribution-run-this-in-a = RustCord è stato installato tramite la tua distribuzione. Eseguilo in un terminale per aggiornare.
 # Context: update_settings
 updates-update-settings-save-diagnostics = Salva diagnostica
 # Context: update_settings
@@ -4033,7 +4033,7 @@ updates-update-settings-log-warnings = Errori e avvisi
 # Context: update_settings
 updates-update-settings-open-folder = Apri cartella
 # Context: update_settings
-updates-update-settings-the-log-folder-could-not-be-written = Impossibile scrivere la cartella del registro. Controlla la cartella dati di Serein e riprova.
+updates-update-settings-the-log-folder-could-not-be-written = Impossibile scrivere la cartella del registro. Controlla la cartella dati di RustCord e riprova.
 # Context: update_settings
 updates-update-settings-timings-stages-and-failures-in-one-local-file-no-account-channel-or = Tempi, fasi ed errori in un unico file di registro locale. I dati di account, canali, messaggi e le credenziali non vengono mai scritti e nulla viene caricato.
 # Context: update_log
@@ -4101,7 +4101,7 @@ verification-show-verification-required = Verifica richiesta
 # Context: show
 verification-show-verify = Verificare
 # Context: show
-verification-show-safer-in-the-official-discord-app = È più sicuro completare questa verifica nell’app ufficiale di Discord. Dopo una verifica risolta in Serein, Discord può chiedere agli account recenti di verificare un numero di telefono.
+verification-show-safer-in-the-official-discord-app = È più sicuro completare questa verifica nell’app ufficiale di Discord. Dopo una verifica risolta in RustCord, Discord può chiedere agli account recenti di verificare un numero di telefono.
 # Context: show
 verification-show-open-discord = Apri Discord
 
@@ -4492,7 +4492,7 @@ onboarding-rules-heading = Regole del server
 # Context: rules
 onboarding-rules-review = Un moderatore esamina queste risposte prima che tu possa chattare.
 # Context: field
-onboarding-field-unsupported = Questo server fa una domanda che Serein non può ancora mostrare. Completa l'accesso nell'app Discord.
+onboarding-field-unsupported = Questo server fa una domanda che RustCord non può ancora mostrare. Completa l'accesso nell'app Discord.
 # Context: field
 onboarding-field-agree = Ho letto e accetto le regole
 
@@ -4628,7 +4628,7 @@ reading-double-click-reaction = Double-click reaction
 
 ## crates/platform/src/app_menu.rs
 # Context: macos_menu_bar
-app-menu-about = Informazioni su Serein
+app-menu-about = Informazioni su RustCord
 # Context: macos_menu_bar
 app-menu-updates = Controlla aggiornamenti…
 # Context: macos_menu_bar
@@ -4636,13 +4636,13 @@ app-menu-settings = Impostazioni…
 # Context: macos_menu_bar
 app-menu-services = Servizi
 # Context: macos_menu_bar
-app-menu-hide = Nascondi Serein
+app-menu-hide = Nascondi RustCord
 # Context: macos_menu_bar
 app-menu-hide-others = Nascondi altre
 # Context: macos_menu_bar
 app-menu-show-all = Mostra tutte
 # Context: macos_menu_bar
-app-menu-quit = Esci da Serein
+app-menu-quit = Esci da RustCord
 # Context: macos_menu_bar
 app-menu-file = File
 # Context: macos_menu_bar
@@ -4684,7 +4684,7 @@ app-menu-bring-all-to-front = Porta tutto in primo piano
 # Context: macos_menu_bar
 app-menu-help = Aiuto
 # Context: macos_menu_bar
-app-menu-github = Serein su GitHub
+app-menu-github = RustCord su GitHub
 # Context: macos_menu_bar
 app-menu-report-issue = Segnala un problema…
 

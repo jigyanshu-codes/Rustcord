@@ -79,7 +79,7 @@ impl RemoteAuth {
 	) -> Result<Zeroizing<String>, Stop> {
 		const LOST: Stop = Stop::Failed("QR sign-in lost its connection.");
 		const INVALID: Stop =
-			Stop::Failed("Discord sent a QR sign-in message Serein does not understand.");
+			Stop::Failed("Discord sent a QR sign-in message RustCord does not understand.");
 		#[derive(serde::Deserialize)]
 		struct Packet {
 			op: String,

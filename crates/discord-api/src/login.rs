@@ -65,7 +65,7 @@ impl fmt::Display for LoginError {
 				"Discord wants an account step first, such as a new password. Finish it on Discord's web page, then log in again."
 			}
 			Self::UnsupportedCaptcha => {
-				"Discord asked for a verification Serein cannot show. Use Discord's web page instead."
+				"Discord asked for a verification RustCord cannot show. Use Discord's web page instead."
 			}
 			Self::Restricted => {
 				"Discord stopped this sign-in for account reasons. Check the official client."
@@ -78,11 +78,11 @@ impl fmt::Display for LoginError {
 				);
 			}
 			Self::Network => "Could not reach Discord. Check your connection and try again.",
-			Self::NoRoute => "Serein's network route is not ready. Try again in a moment.",
+			Self::NoRoute => "RustCord's network route is not ready. Try again in a moment.",
 			Self::Rejected(status) => {
 				return write!(f, "Discord answered sign-in with HTTP {status}.");
 			}
-			Self::Protocol => "Discord sent a sign-in response Serein does not understand.",
+			Self::Protocol => "Discord sent a sign-in response RustCord does not understand.",
 		})
 	}
 }

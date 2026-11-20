@@ -58,7 +58,7 @@ impl Failure {
 		match self {
 			Self::Expired => "Your session expired. Sign in again.",
 			Self::Challenged => {
-				"Discord asked for a security check Serein cannot complete. Finish it in the official client."
+				"Discord asked for a security check RustCord cannot complete. Finish it in the official client."
 			}
 			Self::Forbidden => "Permission denied",
 			Self::AccountRestricted => {
@@ -70,7 +70,7 @@ impl Failure {
 			Self::Ambiguous => {
 				"Could not confirm that it went through. Check the official client before retrying."
 			}
-			Self::Protocol => "Discord sent a response Serein cannot read.",
+			Self::Protocol => "Discord sent a response RustCord cannot read.",
 			Self::ProtocolAt(stage) | Self::CapacityAt(stage) => stage,
 			Self::Capacity => "Too much data to handle safely. Connection stopped.",
 			Self::InvalidCredential => "That is not a valid user session.",

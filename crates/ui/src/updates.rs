@@ -275,7 +275,7 @@ impl MessagingUi {
 		};
 
 		format!(
-			"- **Serein Version:** {} ({channel})\n- **Operating System:** {os} ({arch}){session_type}{package_type}{graphics}\n- **Display Scale:** {scale:.2}\n- **Theme:** {theme_mode} ({theme_variant})\n- **Update Channel:** {update_channel}\n- **Auto Update:** {}",
+			"- **RustCord Version:** {} ({channel})\n- **Operating System:** {os} ({arch}){session_type}{package_type}{graphics}\n- **Display Scale:** {scale:.2}\n- **Theme:** {theme_mode} ({theme_variant})\n- **Update Channel:** {update_channel}\n- **Auto Update:** {}",
 			self.build.version,
 			if self.updates.auto_update {
 				"Enabled"
@@ -306,7 +306,7 @@ impl MessagingUi {
 					.rect_filled(badge, 12, colors.accent.gamma_multiply(0.16));
 				crate::icons::paint(
 					ui.painter(),
-					crate::icons::Icon::Serein,
+					crate::icons::Icon::RustCord,
 					badge.shrink(10.0),
 					colors.accent,
 				);
@@ -367,7 +367,7 @@ impl MessagingUi {
 					ui.vertical(|ui| {
 						ui.spacing_mut().item_spacing.y = 2.0;
 						ui.label(
-							design::semibold(ui, format!("Serein {}", self.build.version), 17.0)
+							design::semibold(ui, format!("RustCord {}", self.build.version), 17.0)
 								.color(colors.text_strong),
 						);
 						ui.add(

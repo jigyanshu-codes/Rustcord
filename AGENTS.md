@@ -1,6 +1,6 @@
-# Serein agent guide
+# RustCord agent guide
 
-Serein is an unofficial native Rust/egui client for existing Discord accounts. It is not a bot,
+RustCord is an unofficial native Rust/egui client for existing Discord accounts. It is not a bot,
 backend, web wrapper, or separate voice service.
 
 ## Product and security boundaries

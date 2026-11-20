@@ -8,7 +8,7 @@ const CUSTOM: [&str; 3] = [
 	"Serein Custom Medium",
 	"Serein Custom SemiBold",
 ];
-const DEFINITIONS_KEY: &str = "serein-font-definitions";
+const DEFINITIONS_KEY: &str = "rustcord-font-definitions";
 
 #[derive(Clone)]
 pub struct CustomFont {

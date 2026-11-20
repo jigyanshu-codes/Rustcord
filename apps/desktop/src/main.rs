@@ -586,7 +586,7 @@ fn main() -> eframe::Result {
 				)
 				.with_min_inner_size(app_settings::MIN_WINDOW_SIZE.map(|size| size as f32))
 				.with_active(!start_minimized)
-				.with_app_id("cz.viceverse.serein");
+				.with_app_id("io.github.rustcord");
 			#[cfg(any(target_os = "windows", target_os = "linux"))]
 			let builder = builder
 				.with_icon(eframe::icon_data::from_png_bytes(icon).expect("bundled app icon"));
@@ -627,7 +627,7 @@ fn main() -> eframe::Result {
 		..Default::default()
 	};
 	let result = eframe::run_native(
-		"Serein",
+		"RustCord",
 		options,
 		Box::new(move |cc| {
 			let mut desktop = Desktop::new(
@@ -660,7 +660,7 @@ fn main() -> eframe::Result {
 	// Quitting mid-share drops media workers that are still closing their encoders, and
 	// NVIDIA's exit handlers crash or deadlock if the process exits during that teardown.
 	if !discord_voice::wait_for_media_threads(std::time::Duration::from_secs(5)) {
-		eprintln!("Screen or camera capture was still closing when Serein exited.");
+		eprintln!("Screen or camera capture was still closing when RustCord exited.");
 	}
 	result
 }
@@ -896,12 +896,15 @@ impl MemoryDiagnostics {
 	/// About 1 KiB each, so a redirected run writes at most a few MiB.
 	const REPORTS: u32 = 2880;
 	fn from_env() -> Option<Self> {
-		if std::env::var_os("SEREIN_MEMORY_DIAGNOSTICS").is_none_or(|value| value != "1") {
+		let enabled = std::env::var_os("RUSTCORD_MEMORY_DIAGNOSTICS")
+			.or_else(|| std::env::var_os("SEREIN_MEMORY_DIAGNOSTICS"))
+			.is_some_and(|value| value == "1");
+		if !enabled {
 			return None;
 		}
 		let (reports, receive) = std::sync::mpsc::sync_channel::<String>(1);
 		std::thread::Builder::new()
-			.name("serein-memory-report".into())
+			.name("rustcord-memory-report".into())
 			.spawn(move || {
 				use std::io::Write;
 				for report in receive {
@@ -939,7 +942,9 @@ impl FrameMetrics {
 	fn new(sample: Option<(Duration, Duration)>) -> Self {
 		Self {
 			enabled: sample.is_some()
-				|| std::env::var_os("SEREIN_FRAME_DIAGNOSTICS").is_some_and(|v| v == "1"),
+				|| std::env::var_os("RUSTCORD_FRAME_DIAGNOSTICS")
+					.or_else(|| std::env::var_os("SEREIN_FRAME_DIAGNOSTICS"))
+					.is_some_and(|v| v == "1"),
 			started: None,
 			sample: sample.map(|(warmup, duration)| FrameSample {
 				ready: std::time::Instant::now() + warmup,
@@ -969,7 +974,7 @@ impl FrameMetrics {
 		}
 		let started = *sample.started.get_or_insert_with(|| {
 			Self::sample_record(serde_json::json!({
-				"serein_frame_sample": "start",
+				"rustcord_frame_sample": "start",
 				"viewport_size": viewport_size,
 				"pixels_per_point": pixels_per_point,
 			}));
@@ -981,7 +986,7 @@ impl FrameMetrics {
 		}
 		sample.complete = true;
 		Self::sample_record(serde_json::json!({
-			"serein_frame_sample": "complete",
+			"rustcord_frame_sample": "complete",
 			"elapsed_ms": elapsed.as_millis(),
 			"callbacks": self.frames,
 			"without_input": self.inputless,
@@ -1041,8 +1046,7 @@ impl Drop for FrameMetrics {
 			use std::io::Write;
 			let _ = writeln!(
 				std::io::stderr(),
-				// Preserve the legacy diagnostic label; elapsed callback time is wall time.
-				"[Serein frames] callbacks={} without_input={} cpu_us_buckets(1000,2000,4000,8000,16000,32000,64000,above)={:?} reflows(total,consecutive)={:?}",
+				"[RustCord frames] callbacks={} without_input={} cpu_us_buckets(1000,2000,4000,8000,16000,32000,64000,above)={:?} reflows(total,consecutive)={:?}",
 				self.frames,
 				self.inputless,
 				self.buckets,
@@ -2056,7 +2060,7 @@ impl Desktop {
 			let (found, wake) = (gsync.clone(), cc.egui_ctx.clone());
 			platform::gsync::detect(move |enabled| {
 				if enabled {
-					eprintln!("[Serein] G-SYNC display detected");
+					eprintln!("[RustCord] G-SYNC display detected");
 					found.store(true, std::sync::atomic::Ordering::Relaxed);
 					wake.request_repaint();
 				}
@@ -2186,7 +2190,7 @@ impl Desktop {
 		messaging.build = ui::design::Build {
 			channel: if cfg!(debug_assertions) {
 				ui::design::Channel::Dev
-			} else if option_env!("SEREIN_CHANNEL") == Some("nightly") {
+			} else if option_env!("RUSTCORD_CHANNEL").or(option_env!("SEREIN_CHANNEL")) == Some("nightly") {
 				ui::design::Channel::Nightly
 			} else {
 				ui::design::Channel::Stable
@@ -2909,7 +2913,7 @@ impl Desktop {
 	fn diagnostics_report(&self, ctx: &egui::Context) -> String {
 		use std::fmt::Write;
 		let mut report = String::with_capacity(24 * 1024);
-		report.push_str("# Serein diagnostics\n\n");
+		report.push_str("# RustCord diagnostics\n\n");
 		report.push_str(&self.messaging.diagnostic_info(ctx));
 		report.push('\n');
 		let log_file = diagnostics::path()
@@ -2997,7 +3001,7 @@ impl Desktop {
 			let wake = ctx.clone();
 			self.runtime.spawn(async move {
 				let destination =
-					platform::save::text_destination(parent, "serein-diagnostics.txt").await;
+					platform::save::text_destination(parent, "rustcord-diagnostics.txt").await;
 				let outcome = match destination {
 					Some(path) => {
 						let written = path.clone();
@@ -3344,13 +3348,13 @@ impl Desktop {
 				}
 				Command::Website => {
 					ctx.open_url(egui::OpenUrl::new_tab(
-						"https://github.com/ViceVerse-cz/Serein",
+						"https://github.com/jigyanshu-codes/Rustcord",
 					));
 					None
 				}
 				Command::ReportIssue => {
 					ctx.open_url(egui::OpenUrl::new_tab(
-						"https://github.com/ViceVerse-cz/Serein/issues/new/choose",
+						"https://github.com/jigyanshu-codes/Rustcord/issues/new/choose",
 					));
 					None
 				}
@@ -5072,14 +5076,14 @@ impl Desktop {
 						if self.messaging.custom_font.busy && self.font_picker.is_none() {
 							self.messaging.custom_font.busy = false;
 							self.messaging.custom_font.status =
-								"Local storage worker stopped. Restart Serein to save fonts.";
+								"Local storage worker stopped. Restart RustCord to save fonts.";
 						}
 						if self.messaging.channel_preferences_reload
 							|| self.messaging.channel_preferences_load_pending
 						{
 							self.messaging.channel_preferences_reload = false;
 							self.messaging.channel_preferences_load_pending = false;
-							self.messaging.channel_preferences_status = "Local storage worker stopped; restart Serein to restore channel preferences.";
+							self.messaging.channel_preferences_status = "Local storage worker stopped; restart RustCord to restore channel preferences.";
 						}
 						presence_cache_stopped = self.presence_load_pending;
 						break;
@@ -5386,7 +5390,7 @@ impl Desktop {
 							"Login saved in the OS credential store"
 						}
 						platform::Saved::Plaintext => {
-							"No OS keyring found. The login is saved in a private file in Serein's data folder."
+							"No OS keyring found. The login is saved in a private file in RustCord's data folder."
 						}
 					}
 				}
@@ -5757,16 +5761,16 @@ impl Desktop {
 					("ready", stopped.is_some_and(|(ready, _)| ready).into()),
 				],
 			);
-			for (setting, scope) in [
-				("SEREIN_MEMBER_DIAGNOSTICS", "members"),
-				("SEREIN_GATEWAY_DIAGNOSTICS", "gateway"),
+			for (rustcord_setting, serein_setting, scope) in [
+				("RUSTCORD_MEMBER_DIAGNOSTICS", "SEREIN_MEMBER_DIAGNOSTICS", "members"),
+				("RUSTCORD_GATEWAY_DIAGNOSTICS", "SEREIN_GATEWAY_DIAGNOSTICS", "gateway"),
 			] {
-				if std::env::var_os(setting).as_deref() == Some(std::ffi::OsStr::new("1")) {
+				if std::env::var_os(rustcord_setting).or_else(|| std::env::var_os(serein_setting)).as_deref() == Some(std::ffi::OsStr::new("1")) {
 					use std::io::Write;
 					// One extra fixed-label terminal line per enabled scope; closed stderr is OK.
 					let _ = writeln!(
 						std::io::stderr(),
-						"[Serein {scope}] Session stopped: {}",
+						"[RustCord {scope}] Session stopped: {}",
 						failure.label()
 					);
 				}
@@ -5912,7 +5916,7 @@ impl Desktop {
 		let radius = round_corners::RADIUS * self.window.scale_factor() as f32;
 		ctx.layer_painter(egui::LayerId::new(
 			egui::Order::Debug,
-			egui::Id::unique("serein-round-corners"),
+			egui::Id::unique("rustcord-round-corners"),
 		))
 		.add(round_corners::Mask::callback(
 			ctx.viewport_rect(),
@@ -6825,7 +6829,7 @@ impl eframe::App for Desktop {
 						ui.painter().rect_filled(rect, 8, p.accent);
 						ui::icons::paint(
 							ui.painter(),
-							ui::icons::Icon::Serein,
+							ui::icons::Icon::RustCord,
 							rect.shrink(7.0),
 							p.accent_text,
 						);

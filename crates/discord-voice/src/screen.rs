@@ -207,10 +207,13 @@ impl Worker {
 				finished_ready.store(false, Ordering::Release);
 				// The desktop only shows the latest status, which a later stop overwrites.
 				// Name the cause once so a share that ends by itself is never a mystery.
-				if std::env::var_os("SEREIN_VOICE_DIAGNOSTICS").is_some_and(|value| value == "1") {
+				let voice_diag = std::env::var_os("RUSTCORD_VOICE_DIAGNOSTICS")
+					.or_else(|| std::env::var_os("SEREIN_VOICE_DIAGNOSTICS"))
+					.is_some_and(|value| value == "1");
+				if voice_diag {
 					match &result {
-						Ok(()) => eprintln!("[Serein voice Screen] capture_stopped=ok"),
-						Err(reason) => eprintln!("[Serein voice Screen] capture_stopped={reason}"),
+						Ok(()) => eprintln!("[RustCord voice Screen] capture_stopped=ok"),
+						Err(reason) => eprintln!("[RustCord voice Screen] capture_stopped={reason}"),
 					}
 				}
 				let _ = complete.try_send(result);

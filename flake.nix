@@ -27,13 +27,14 @@
                 system,
                 ...
             }: {
-                packages.serein = pkgs.callPackage ./packaging/nix/package.nix {};
-                packages.default = config.packages.serein;
+                packages.rustcord = pkgs.callPackage ./packaging/nix/package.nix {};
+                packages.serein = config.packages.rustcord;
+                packages.default = config.packages.rustcord;
 
                 devShells.default = pkgs.mkShell {
-                    name = "serein-dev";
+                    name = "rustcord-dev";
 
-                    inputsFrom = [config.packages.serein];
+                    inputsFrom = [config.packages.rustcord];
                 };
             };
         };

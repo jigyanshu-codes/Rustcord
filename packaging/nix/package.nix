@@ -93,7 +93,7 @@
     ];
 in
     rustPlatform.buildRustPackage (finalAttrs: {
-        pname = "serein";
+        pname = "rustcord";
         # Match `cargo build`: release automation versions Cargo.toml, not this file.
         version = (lib.importTOML ../../Cargo.toml).workspace.package.version;
 
@@ -114,7 +114,7 @@ in
 
         cargoBuildFlags = [
             "--package"
-            "serein"
+            "rustcord"
         ];
 
         nativeBuildInputs =
@@ -170,10 +170,10 @@ in
         # MPL-2.0 hpke-rs source ship with every binary.
         postInstall =
             ''
-                docs="$out/share/doc/serein"
+                docs="$out/share/doc/rustcord"
             ''
             + lib.optionalString isDarwin ''
-                app="$out/Applications/Serein.app/Contents"
+                app="$out/Applications/RustCord.app/Contents"
                 docs="$app/Resources"
             ''
             + ''
@@ -189,10 +189,10 @@ in
                 cp -R vendor/hpke-rs "$docs/source/"
             ''
             + lib.optionalString isLinux ''
-                install -Dm444 packaging/linux/serein.desktop \
-                  $out/share/applications/cz.viceverse.serein.desktop
-                substituteInPlace $out/share/applications/cz.viceverse.serein.desktop \
-                  --replace-fail "Exec=serein" "Exec=$out/bin/serein"
+                install -Dm444 packaging/linux/rustcord.desktop \
+                  $out/share/applications/io.github.rustcord.desktop
+                substituteInPlace $out/share/applications/io.github.rustcord.desktop \
+                  --replace-fail "Exec=rustcord" "Exec=$out/bin/rustcord"
                 mkdir -p $out/share/icons
                 cp -R packaging/linux/hicolor $out/share/icons/
             ''
@@ -200,22 +200,22 @@ in
             # (privacy usage descriptions, identifier and icon) from the launched binary.
             + lib.optionalString isDarwin ''
                 install -Dm444 packaging/macos/Info.plist "$app/Info.plist"
-                install -Dm444 packaging/macos/Serein.icns "$app/Resources/Serein.icns"
+                install -Dm444 packaging/macos/RustCord.icns "$app/Resources/RustCord.icns"
                 mkdir -p "$app/MacOS" "$out/share/doc"
-                mv "$out/bin/serein" "$app/MacOS/serein"
-                ln -s "$app/MacOS/serein" "$out/bin/serein"
-                ln -s "$app/Resources" "$out/share/doc/serein"
+                mv "$out/bin/rustcord" "$app/MacOS/rustcord"
+                ln -s "$app/MacOS/rustcord" "$out/bin/rustcord"
+                ln -s "$app/Resources" "$out/share/doc/rustcord"
             '';
 
         meta = {
             description = "Tiny, performant, native Discord client written in Rust (egui/wgpu)";
-            homepage = "https://github.com/ViceVerse-cz/Serein";
+            homepage = "https://github.com/jigyanshu-codes/Rustcord";
             license = with lib.licenses; [
                 mit
                 asl20
             ];
             platforms = lib.platforms.linux ++ lib.platforms.darwin;
-            mainProgram = "serein";
+            mainProgram = "rustcord";
             maintainers = with lib.maintainers; [
                 myamusashi
             ];

@@ -46,7 +46,8 @@ pub use login_linux::LoginView;
 
 /// Logical height of the native header the desktop app draws above the login webview.
 pub const LOGIN_HEADER_HEIGHT: f32 = 56.0;
-const SERVICE: &str = "cz.viceverse.serein";
+const SERVICE: &str = "io.github.rustcord";
+const LEGACY_SERVICE: &str = "cz.viceverse.serein";
 #[cfg(not(feature = "development-data"))]
 const ACCOUNT: &str = "discord-session";
 #[cfg(feature = "development-data")]
@@ -530,7 +531,16 @@ fn load_entry(name: &str) -> Result<Option<SessionSecret>, CredentialError> {
 		Ok(value) => SessionSecret::from_owner_input(value)
 			.map(Some)
 			.map_err(|_| CredentialError::Invalid),
-		Err(keyring_core::Error::NoEntry) => Ok(None),
+		Err(keyring_core::Error::NoEntry) => {
+			if let Ok(legacy) = keyring_core::Entry::new(LEGACY_SERVICE, name) {
+				if let Ok(value) = legacy.get_password() {
+					return SessionSecret::from_owner_input(value)
+						.map(Some)
+						.map_err(|_| CredentialError::Invalid);
+				}
+			}
+			Ok(None)
+		}
 		Err(_) => Err(CredentialError::Unavailable),
 	}
 }
@@ -540,6 +550,9 @@ fn save_entry(name: &str, secret: &SessionSecret) -> Result<(), CredentialError>
 		.map_err(|_| CredentialError::Unavailable)
 }
 fn forget_entry(name: &str) -> Result<(), CredentialError> {
+	if let Ok(legacy) = keyring_core::Entry::new(LEGACY_SERVICE, name) {
+		let _ = legacy.delete_credential();
+	}
 	match entry(name)?.delete_credential() {
 		Ok(()) | Err(keyring_core::Error::NoEntry) => Ok(()),
 		Err(_) => Err(CredentialError::Unavailable),

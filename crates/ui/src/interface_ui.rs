@@ -705,7 +705,7 @@ mod tests {
 				id: "tree-plugin".into(),
 				name: "Tree plugin".into(),
 				version: "1.0.0".into(),
-				author: "Serein contributors".into(),
+				author: "RustCord contributors".into(),
 				license: "MIT".into(),
 				source: "https://example.org/source".into(),
 				kind: extensions::ExtensionKind::Plugin,

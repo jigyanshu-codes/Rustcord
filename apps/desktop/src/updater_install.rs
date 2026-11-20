@@ -13,6 +13,7 @@ use std::{
 const MAX_FILES: usize = 8192;
 const MAX_UNPACKED: u64 = 1024 * 1024 * 1024;
 const WINDOWS_FILES: &[&str] = &[
+	"rustcord.exe",
 	"serein.exe",
 	"README.md",
 	"LICENSE-MIT",
@@ -178,19 +179,19 @@ fn installation() -> Result<PathBuf, String> {
 			.parent()
 			.and_then(Path::parent)
 			.and_then(Path::parent)
-			.ok_or("Run the installed Serein.app to install updates.")?;
-		if exe.file_name().is_none_or(|name| name != "serein")
+			.ok_or("Run the installed RustCord.app to install updates.")?;
+		if exe.file_name().is_none_or(|name| name != "rustcord" && name != "serein")
 			|| exe
 				.parent()
 				.and_then(Path::file_name)
 				.is_none_or(|name| name != "MacOS")
 			|| app.extension().is_none_or(|extension| extension != "app")
 		{
-			return Err("Run the installed Serein.app to install updates; source builds cannot replace themselves.".into());
+			return Err("Run the installed RustCord.app to install updates; source builds cannot replace themselves.".into());
 		}
 		if app.starts_with("/Volumes") || app.to_string_lossy().contains("/AppTranslocation/") {
 			return Err(
-				"Move Serein to Applications or another writable folder before updating.".into(),
+				"Move RustCord to Applications or another writable folder before updating.".into(),
 			);
 		}
 		Ok(app.to_owned())
@@ -198,15 +199,15 @@ fn installation() -> Result<PathBuf, String> {
 		let root = exe
 			.parent()
 			.ok_or("Cannot locate the installed application folder.")?;
-		if exe.file_name().is_none_or(|name| name != "serein.exe")
+		if exe.file_name().is_none_or(|name| name != "rustcord.exe" && name != "serein.exe")
 			|| !root.join("THIRD_PARTY_NOTICES.md").is_file()
 			|| !root.join("licenses").is_dir()
 		{
-			return Err("Run Serein from an extracted release package to install updates; source builds cannot replace themselves.".into());
+			return Err("Run RustCord from an extracted release package to install updates; source builds cannot replace themselves.".into());
 		}
 		Ok(root.to_owned())
 	} else {
-		Err("Use your package manager to update Serein on Linux.".into())
+		Err("Use your package manager to update RustCord on Linux.".into())
 	}
 }
 
@@ -704,14 +705,15 @@ pub(super) fn unpack(
 		}
 	}
 	if cfg!(target_os = "macos") {
-		if !destination
-			.join("Serein.app/Contents/MacOS/serein")
-			.is_file()
-		{
-			return Err("The update does not contain Serein.app.".into());
-		}
-		verify_mac(&destination.join("Serein.app"), installed)?;
-	} else if !destination.join("serein.exe").is_file()
+		let mac_app = if destination.join("RustCord.app/Contents/MacOS/rustcord").is_file() {
+			destination.join("RustCord.app")
+		} else if destination.join("Serein.app/Contents/MacOS/serein").is_file() {
+			destination.join("Serein.app")
+		} else {
+			return Err("The update does not contain RustCord.app.".into());
+		};
+		verify_mac(&mac_app, installed)?;
+	} else if (!destination.join("rustcord.exe").is_file() && !destination.join("serein.exe").is_file())
 		|| !destination.join("licenses").is_dir()
 		|| !destination.join("THIRD_PARTY_NOTICES.md").is_file()
 	{
@@ -981,11 +983,15 @@ try {
     Move-Item -LiteralPath $source -Destination $target
     $replaced.Add($name)
   }
-  $uninstallKey = 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Uninstall\Serein'
+  $uninstallKey = 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Uninstall\RustCord'
+  if (!(Test-Path -LiteralPath $uninstallKey)) {
+    $uninstallKey = 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Uninstall\Serein'
+  }
   if ($plan.version -and (Test-Path -LiteralPath $uninstallKey)) {
     Set-ItemProperty -LiteralPath $uninstallKey -Name 'DisplayVersion' -Value ([string]$plan.version) -ErrorAction SilentlyContinue
   }
-  Start-Process -FilePath (Join-Path $installation 'serein.exe') -WorkingDirectory $installation
+  $exeName = if (Test-Path -LiteralPath (Join-Path $installation 'rustcord.exe')) { 'rustcord.exe' } else { 'serein.exe' }
+  Start-Process -FilePath (Join-Path $installation $exeName) -WorkingDirectory $installation
 } catch {
   foreach ($name in $replaced) {
     $target = Join-Path $installation $name
@@ -994,7 +1000,8 @@ try {
   foreach ($name in $moved) {
     Move-Item -LiteralPath (Join-Path $backup $name) -Destination (Join-Path $installation $name) -ErrorAction SilentlyContinue
   }
-  Start-Process -FilePath (Join-Path $installation 'serein.exe') -WorkingDirectory $installation -ErrorAction SilentlyContinue
+  $exeName = if (Test-Path -LiteralPath (Join-Path $installation 'rustcord.exe')) { 'rustcord.exe' } else { 'serein.exe' }
+  Start-Process -FilePath (Join-Path $installation $exeName) -WorkingDirectory $installation -ErrorAction SilentlyContinue
   exit 1
 }
 try {
