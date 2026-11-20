@@ -20,10 +20,10 @@ def update_metadata(version, release_tag):
         raise ValueError("Expected a semantic application version")
     if release_tag and release_tag != f"v{version}":
         raise ValueError("AppImage release tag must match the application version")
-    name = f"serein-{release_tag or version}-Linux-X64.AppImage"
+    name = f"rustcord-{release_tag or version}-Linux-X64.AppImage"
     channel = "latest-pre" if "-" in version.split("+", 1)[0] else "latest"
-    information = f"gh-releases-zsync|ViceVerse-cz|Serein|{channel}|serein-*-Linux-X64.AppImage.zsync"
-    url = f"https://github.com/ViceVerse-cz/Serein/releases/download/v{version}/serein-v{version}-Linux-X64.AppImage"
+    information = f"gh-releases-zsync|jigyanshu-codes|Rustcord|{channel}|rustcord-*-Linux-X64.AppImage.zsync"
+    url = f"https://github.com/jigyanshu-codes/Rustcord/releases/download/v{version}/rustcord-v{version}-Linux-X64.AppImage"
     return name, information, url
 
 
@@ -31,7 +31,8 @@ def build(root, version):
     native_elf(root)
     if platform.machine() != "x86_64":
         raise ValueError("AppImage releases currently support Linux x86_64 only")
-    name, information, url = update_metadata(version, os.environ.get("SEREIN_RELEASE_TAG", ""))
+    name, information, url = update_metadata(version, os.environ.get("RUSTCORD_RELEASE_TAG") or os.environ.get("SEREIN_RELEASE_TAG", ""))
+    bin_name = "rustcord" if (root / "rustcord").exists() else "serein"
     tools = Path("target/appimage-tools").resolve()
     appimagetool = tools / "appimagetool"
     runtime = tools / "runtime-x86_64"
@@ -41,22 +42,25 @@ def build(root, version):
         raise ValueError("The 'file' command is required by appimagetool but was not found in PATH")
     if not shutil.which("zsyncmake"):
         raise ValueError("Install zsync to generate AppImage delta-update metadata")
-    libraries = subprocess.check_output(["ldd", str(root / "serein")], text=True)
+    libraries = subprocess.check_output(["ldd", str(root / bin_name)], text=True)
     if "not found" in libraries:
         raise ValueError(f"Missing host runtime libraries:\n{libraries}")
-    with tempfile.TemporaryDirectory(prefix="serein-appimage-") as directory:
+    with tempfile.TemporaryDirectory(prefix="rustcord-appimage-") as directory:
         temporary = Path(directory)
-        appdir = temporary / "Serein.AppDir"
+        appdir = temporary / "RustCord.AppDir"
         stage_payload(root, appdir)
         shutil.copyfile("packaging/appimage/AppRun", appdir / "AppRun")
         (appdir / "AppRun").chmod(0o755)
-        shutil.copyfile("packaging/linux/serein.desktop", appdir / "cz.viceverse.serein.desktop")
-        shutil.copyfile("packaging/linux/hicolor/256x256/apps/serein.png", appdir / "serein.png")
-        doc = appdir / "usr/share/doc/serein"
+        desktop_src = Path("packaging/linux/rustcord.desktop") if Path("packaging/linux/rustcord.desktop").exists() else Path("packaging/linux/serein.desktop")
+        shutil.copyfile(desktop_src, appdir / f"io.github.{bin_name}.desktop")
+        icon_src = Path("packaging/linux/hicolor/256x256/apps/rustcord.png") if Path("packaging/linux/hicolor/256x256/apps/rustcord.png").exists() else Path("packaging/linux/hicolor/256x256/apps/serein.png")
+        shutil.copyfile(icon_src, appdir / f"{bin_name}.png")
+        shutil.copyfile(icon_src, appdir / ".DirIcon")
+        doc = appdir / f"usr/share/doc/{bin_name}"
         shutil.copyfile("packaging/appimage/README.md", doc / "AppImage-README.md")
         shutil.copyfile("packaging/appimage/RUNTIME-LICENSE", doc / "licenses/AppImage-runtime.txt")
         (doc / "AppImage-host-libraries.txt").write_text(libraries, encoding="utf-8")
-        subprocess.run(["desktop-file-validate", str(appdir / "cz.viceverse.serein.desktop")], check=True)
+        subprocess.run(["desktop-file-validate", str(appdir / f"io.github.{bin_name}.desktop")], check=True)
         candidate = temporary / name
         subprocess.run([str(appimagetool), "--runtime-file", str(runtime),
                         "--updateinformation", information, "--file-url", url,
@@ -86,7 +90,7 @@ def build(root, version):
                 target = extracted / source.relative_to(appdir)
                 if not target.is_file() or not filecmp.cmp(source, target, shallow=False):
                     raise ValueError(f"AppImage changed payload: {source.relative_to(appdir)}")
-        for name in ["AppRun", "usr/bin/serein"]:
+        for name in ["AppRun", f"usr/bin/{bin_name}"]:
             if not os.access(extracted / name, os.X_OK):
                 raise ValueError(f"AppImage lost executable permission: {name}")
         destination = root / candidate.name

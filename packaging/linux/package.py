@@ -47,11 +47,17 @@ def stage_payload(root, stage, prefix="usr"):
     """Copy the shared, allowlisted native/Flatpak installation payload."""
     if prefix not in {"usr", "app"}:
         raise ValueError("Installation prefix must be usr or app")
-    doc = stage / prefix / "share/doc/serein"
-    copy(root / "serein", stage / prefix / "bin/serein")
-    desktop = stage / prefix / "share/applications/cz.viceverse.serein.desktop"
-    desktop.parent.mkdir(parents=True)
-    desktop.write_text(Path("packaging/linux/serein.desktop").read_text(), encoding="utf-8")
+    bin_name = "rustcord" if (root / "rustcord").exists() else "serein"
+    doc = stage / prefix / f"share/doc/{bin_name}"
+    copy(root / bin_name, stage / prefix / f"bin/{bin_name}")
+    if bin_name != "serein":
+        copy(root / bin_name, stage / prefix / "bin/serein")
+    desktop_src = Path(f"packaging/linux/{bin_name}.desktop") if Path(f"packaging/linux/{bin_name}.desktop").exists() else Path("packaging/linux/serein.desktop")
+    desktop = stage / prefix / f"share/applications/io.github.{bin_name}.desktop"
+    if bin_name == "serein":
+        desktop = stage / prefix / "share/applications/cz.viceverse.serein.desktop"
+    desktop.parent.mkdir(parents=True, exist_ok=True)
+    desktop.write_text(desktop_src.read_text(encoding="utf-8"), encoding="utf-8")
     copy(Path("packaging/linux/hicolor"), stage / prefix / "share/icons/hicolor")
     for name in ["README.md", "LICENSE-MIT", "LICENSE-APACHE", "THIRD_PARTY_NOTICES.md"]:
         copy(root / name, doc / name)
@@ -66,12 +72,13 @@ def stage_payload(root, stage, prefix="usr"):
     for name in ["files", "notifications", "login", "audio", "voice", "dependencies"]:
         copy(root / "licenses" / name, doc / "licenses" / name, Path("assets/licenses") / name)
     for path in [stage, *stage.rglob("*")]:
-        path.chmod(0o755 if path.is_dir() or path == stage / prefix / "bin/serein" else 0o644)
+        path.chmod(0o755 if path.is_dir() or path.parent.name == "bin" else 0o644)
 
 
 def smoke(package, stage, temporary, version, architecture, depends):
+    pkg_name = output("dpkg-deb", "--field", str(package), "Package")
     fields = {
-        "Package": "serein", "Version": version, "Architecture": architecture,
+        "Package": pkg_name, "Version": version, "Architecture": architecture,
         "Depends": depends,
     }
     for field, expected in fields.items():
@@ -85,7 +92,7 @@ def smoke(package, stage, temporary, version, architecture, depends):
     with tarfile.open(archive) as contents:
         for member in contents:
             path = Path(member.name)
-            expected_mode = 0o755 if member.isdir() or member.name == "./usr/bin/serein" else 0o644
+            expected_mode = 0o755 if member.isdir() or member.name.startswith("./usr/bin/") else 0o644
             if (path.is_absolute() or ".." in path.parts
                     or not (member.isfile() or member.isdir())
                     or member.mode != expected_mode or member.uid or member.gid):
@@ -102,8 +109,14 @@ def smoke(package, stage, temporary, version, architecture, depends):
     checked("dpkg-deb", "--control", str(package), str(control))
     if payload_files(control) != ["control"]:
         raise ValueError("Unexpected control files or maintainer scripts")
-    checked("desktop-file-validate", str(extracted / "usr/share/applications/cz.viceverse.serein.desktop"))
-    libraries = output("ldd", str(extracted / "usr/bin/serein"))
+    desktop_file = extracted / f"usr/share/applications/io.github.{pkg_name}.desktop"
+    if not desktop_file.exists():
+        desktop_file = extracted / "usr/share/applications/cz.viceverse.serein.desktop"
+    checked("desktop-file-validate", str(desktop_file))
+    bin_file = extracted / f"usr/bin/{pkg_name}"
+    if not bin_file.exists():
+        bin_file = extracted / "usr/bin/serein"
+    libraries = output("ldd", str(bin_file))
     if "not found" in libraries:
         raise ValueError(f"Unresolved packaged executable dependencies:\n{libraries}")
     print(f"Debian package smoke passed: {len(expected)} files; executable, desktop entry, "
@@ -118,7 +131,8 @@ def package(root, application_version):
     if machine is None:
         raise ValueError(f"Unverified Debian package architecture: {architecture}")
     # Rust and dpkg must agree: do not label a cross-built binary as the host arch.
-    with (root / "serein").open("rb") as executable:
+    bin_name = "rustcord" if (root / "rustcord").exists() else "serein"
+    with (root / bin_name).open("rb") as executable:
         header = executable.read(20)
     if (len(header) != 20 or header[:6] != b"\x7fELF\x02\x01"
             or struct.unpack("<H", header[18:20])[0] != machine):
@@ -127,19 +141,20 @@ def package(root, application_version):
     checked("dpkg", "--validate-version", version)
     # A fresh owned directory prevents stale files, logs or credentials in dist
     # from entering a package. TemporaryDirectory removes only this invocation.
-    with tempfile.TemporaryDirectory(prefix="serein-debian-package-") as directory:
+    with tempfile.TemporaryDirectory(prefix=f"{bin_name}-debian-package-") as directory:
         temporary = Path(directory).resolve()
-        stage = temporary / "debian/serein"
+        pkg_name = bin_name
+        stage = temporary / f"debian/{pkg_name}"
         stage_payload(root, stage)
         debian = temporary / "debian"
         debian.mkdir(exist_ok=True)
         (debian / "control").write_text(
-            "Source: serein\nSection: net\nPriority: optional\n"
-            "Maintainer: Serein contributors <noreply@github.com>\n\n"
-            "Package: serein\nArchitecture: any\nDescription: Unofficial native Discord client\n",
+            f"Source: {pkg_name}\nSection: net\nPriority: optional\n"
+            "Maintainer: RustCord contributors <noreply@github.com>\n\n"
+            f"Package: {pkg_name}\nArchitecture: any\nDescription: Unofficial native Discord client\n",
             encoding="utf-8")
         (stage / "DEBIAN").mkdir()
-        dependencies = output("dpkg-shlibdeps", "-O", "debian/serein/usr/bin/serein", cwd=temporary)
+        dependencies = output("dpkg-shlibdeps", "-O", f"debian/{pkg_name}/usr/bin/{bin_name}", cwd=temporary)
         depends = next(line.removeprefix("shlibs:Depends=") for line in dependencies.splitlines()
                        if line.startswith("shlibs:Depends="))
         # dlopen libraries and desktop services are invisible to ELF DT_NEEDED.
@@ -149,11 +164,13 @@ def package(root, application_version):
         installed_kib = sum(1 if p.is_dir() else max(1, (p.stat().st_size + 1023) // 1024)
                             for p in stage.rglob("*"))
         control = stage / "DEBIAN/control"
+        provides_clause = "Provides: serein\nReplaces: serein\n" if pkg_name == "rustcord" else ""
         control.write_text(
-            f"Package: serein\nVersion: {version}\nArchitecture: {architecture}\n"
+            f"Package: {pkg_name}\nVersion: {version}\nArchitecture: {architecture}\n"
             "Section: net\nPriority: optional\n"
-            "Maintainer: Serein contributors <noreply@github.com>\n"
-            "Homepage: https://github.com/ViceVerse-cz/Serein\n"
+            f"{provides_clause}"
+            "Maintainer: RustCord contributors <noreply@github.com>\n"
+            "Homepage: https://github.com/jigyanshu-codes/Rustcord\n"
             f"Installed-Size: {installed_kib}\nDepends: {depends}\n"
             # apt installs Recommends by default; a keyring or desktop-specific portal would
             # pull a whole desktop. The desktop provides both, and logins fall back to a file.
@@ -165,13 +182,18 @@ def package(root, application_version):
             " Unofficial, experimental, and not endorsed by Discord.\n",
             encoding="utf-8")
         for path in [stage, *stage.rglob("*")]:
-            path.chmod(0o755 if path.is_dir() or path == stage / "usr/bin/serein" else 0o644)
-        checked("desktop-file-validate", str(stage / "usr/share/applications/cz.viceverse.serein.desktop"))
-        artifact = root / f"serein_{version}_{architecture}.deb"
+            path.chmod(0o755 if path.is_dir() or path.parent.name == "bin" else 0o644)
+        desktop_file = stage / f"usr/share/applications/io.github.{pkg_name}.desktop"
+        if not desktop_file.exists():
+            desktop_file = stage / "usr/share/applications/cz.viceverse.serein.desktop"
+        checked("desktop-file-validate", str(desktop_file))
+        artifact = root / f"{pkg_name}_{version}_{architecture}.deb"
         candidate = temporary / artifact.name
         checked("dpkg-deb", "--root-owner-group", "-Zxz", "--build", str(stage), str(candidate))
         smoke(candidate, stage, temporary, version, architecture, depends)
         shutil.copyfile(candidate, artifact)
+        if pkg_name == "rustcord":
+            shutil.copyfile(candidate, root / f"serein_{version}_{architecture}.deb")
         print(f"Unsigned Debian package: {artifact} ({artifact.stat().st_size} bytes; "
               f"Installed-Size {installed_kib} KiB).")
         print(f"Runtime dependencies: {depends}; recommends GStreamer plugins for inline "
@@ -180,7 +202,8 @@ def package(root, application_version):
 
 def native_elf(root):
     machine = {"x86_64": 62, "aarch64": 183}.get(platform.machine())
-    with (root / "serein").open("rb") as stream:
+    bin_name = "rustcord" if (root / "rustcord").exists() else "serein"
+    with (root / bin_name).open("rb") as stream:
         header = stream.read(20)
     if (sys.platform != "linux" or machine is None or len(header) != 20
             or header[:6] != b"\x7fELF\x02\x01"
@@ -219,12 +242,19 @@ def native_package(root, application_version, format):
         raise ValueError(f"Build {format} natively on its supported distribution, not {distro}")
     if format == "arch" and os.getuid() == 0:
         raise ValueError("Run Arch builds as an unprivileged user; makepkg refuses root")
-    with tempfile.TemporaryDirectory(prefix="serein-linux-package-") as directory:
+    with tempfile.TemporaryDirectory(prefix="rustcord-linux-package-") as directory:
         temporary = Path(directory).resolve()
         stage = temporary / "payload"
         stage_payload(root, stage)
-        checked("desktop-file-validate", str(stage / "usr/share/applications/cz.viceverse.serein.desktop"))
-        libraries = output("ldd", str(stage / "usr/bin/serein"))
+        pkg_name = "rustcord" if (stage / "usr/bin/rustcord").exists() else "serein"
+        desktop_file = stage / f"usr/share/applications/io.github.{pkg_name}.desktop"
+        if not desktop_file.exists():
+            desktop_file = stage / "usr/share/applications/cz.viceverse.serein.desktop"
+        checked("desktop-file-validate", str(desktop_file))
+        bin_file = stage / f"usr/bin/{pkg_name}"
+        if not bin_file.exists():
+            bin_file = stage / "usr/bin/serein"
+        libraries = output("ldd", str(bin_file))
         if "not found" in libraries:
             raise ValueError(f"Unresolved packaged executable dependencies:\n{libraries}")
         if format == "rpm":
@@ -252,30 +282,38 @@ def rpm_package(temporary, stage, application_version, distro):
             "gstreamer1-plugins-base" if distro == "fedora" else "gstreamer-plugins-base",
             "pipewire-gstreamer" if distro == "fedora" else "gstreamer-plugin-pipewire"]
     plugins = "gstreamer1-plugins-base" if distro == "fedora" else "gstreamer-plugins-base"
-    spec = temporary / "serein.spec"
+    pkg_name = "rustcord" if (stage / "usr/bin/rustcord").exists() else "serein"
+    spec = temporary / f"{pkg_name}.spec"
+    bin_line = f"/usr/bin/{pkg_name}\n"
+    if (stage / "usr/bin/serein").exists() and pkg_name != "serein":
+        bin_line += "/usr/bin/serein\n"
+    desktop_line = f"/usr/share/applications/io.github.{pkg_name}.desktop\n" if (stage / f"usr/share/applications/io.github.{pkg_name}.desktop").exists() else "/usr/share/applications/cz.viceverse.serein.desktop\n"
+    doc_line = f"/usr/share/doc/{pkg_name}\n"
     spec.write_text(
         "%global debug_package %{nil}\n%global __os_install_post %{nil}\n"
         "%global _build_id_links none\n"
-        f"Name: serein\nVersion: {version}\nRelease: {release}\n"
+        f"Name: {pkg_name}\nVersion: {version}\nRelease: {release}\n"
         "Summary: Unofficial native Discord client\nLicense: MIT OR Apache-2.0\n"
-        "URL: https://github.com/ViceVerse-cz/Serein\n"
+        "URL: https://github.com/jigyanshu-codes/Rustcord\n"
         + "\n".join(f"Requires: {item}" for item in requires)
         + f"\nRecommends: {plugins}\nSuggests: gnome-keyring\n"
         "\n%description\nNative Rust client for existing Discord accounts, including voice.\n"
         "Unofficial, experimental, and not endorsed by Discord.\n"
-        "\n%install\nmkdir -p %{buildroot}\ncp -a %{_serein_payload}/. %{buildroot}/\n"
-        "\n%files\n%defattr(-,root,root,-)\n/usr/bin/serein\n"
-        "/usr/share/applications/cz.viceverse.serein.desktop\n/usr/share/doc/serein\n"
+        f"\n%install\nmkdir -p %{{buildroot}}\ncp -a %{{_{pkg_name}_payload}}/. %{{buildroot}}/\n"
+        "\n%files\n%defattr(-,root,root,-)\n"
+        + bin_line
+        + desktop_line
+        + doc_line
         + "".join(f"/{name}\n" for name in payload_files(stage) if name.startswith("usr/share/icons/")),
         encoding="utf-8")
     # Paths are passed as RPM macro values; reject macro/shell metacharacters.
     if not re.fullmatch(r"[/A-Za-z0-9_.-]+", str(temporary)):
         raise ValueError("RPM temporary directory must have a simple absolute path")
     checked("rpmbuild", "-bb", "--define", f"_topdir {temporary}/rpm",
-            "--define", f"_serein_payload {stage}", str(spec))
+            "--define", f"_{pkg_name}_payload {stage}", str(spec))
     artifact, = (temporary / "rpm/RPMS").rglob("*.rpm")
     actual = output("rpm", "-qp", "--qf", "%{NAME}\n%{VERSION}\n%{RELEASE}\n%{ARCH}", str(artifact))
-    if actual != f"serein\n{version}\n{release}\n{platform.machine()}":
+    if actual != f"{pkg_name}\n{version}\n{release}\n{platform.machine()}":
         raise ValueError(f"Incorrect RPM metadata: {actual}")
     if output("rpm", "-qp", "--scripts", str(artifact)):
         raise ValueError("Unexpected RPM install scripts")
@@ -283,7 +321,7 @@ def rpm_package(temporary, stage, application_version, distro):
     for line in listing.splitlines():
         name, mode, user, group = line.split("\t")
         path = stage / name.removeprefix("/")
-        expected_mode = 0o40755 if path.is_dir() else 0o100755 if name == "/usr/bin/serein" else 0o100644
+        expected_mode = 0o40755 if path.is_dir() else 0o100755 if name.startswith("/usr/bin/") else 0o100644
         if (".." in Path(name).parts or not path.exists()
                 or int(mode, 8) != expected_mode or user != "root" or group != "root"):
             raise ValueError(f"Unexpected RPM payload entry: {line}")
@@ -318,17 +356,18 @@ def arch_package(temporary, stage, application_version, libraries):
         depends.add(f"{name}>={installed_version}")
     if any(not re.fullmatch(r"[A-Za-z0-9@._+:>=-]+", item) for item in depends):
         raise ValueError("Invalid native Arch dependency metadata")
+    pkg_name = "rustcord" if (stage / "usr/bin/rustcord").exists() else "serein"
     (temporary / "PKGBUILD").write_text(
-        f"pkgname=serein\npkgver='{version}'\npkgrel=1\n"
+        f"pkgname={pkg_name}\npkgver='{version}'\npkgrel=1\n"
         "pkgdesc='Unofficial native Discord client'\n"
-        f"arch=('{platform.machine()}')\nurl='https://github.com/ViceVerse-cz/Serein'\n"
+        f"arch=('{platform.machine()}')\nurl='https://github.com/jigyanshu-codes/Rustcord'\n"
         "license=('MIT' 'Apache-2.0')\noptions=('!strip' '!debug' '!lto')\n"
         + "depends=(" + " ".join(f"'{item}'" for item in sorted(depends)) + ")\n"
         "optdepends=('gnome-keyring: OS keyring for saved logins (any Secret Service provider works)' "
         "'gst-plugins-bad: hardware screen encoding' 'gst-libav: inline video')\n"
         "package() { cp -a \"$startdir/payload/.\" \"$pkgdir/\"; }\n", encoding="utf-8")
     checked("makepkg", "--nodeps", "--noconfirm", cwd=temporary)
-    artifact, = temporary.glob("serein-*.pkg.tar.*")
+    artifact, = temporary.glob(f"{pkg_name}-*.pkg.tar.*")
     archive = temporary / "payload.tar"
     with archive.open("wb") as stream:
         subprocess.run(["bsdtar", "-cf", "-", "--format=ustar", "@" + str(artifact)], stdout=stream, check=True)
@@ -336,7 +375,7 @@ def arch_package(temporary, stage, application_version, libraries):
     extracted.mkdir()
     with tarfile.open(archive) as contents:
         metadata = contents.extractfile(".PKGINFO").read().decode()
-        for item in [f"pkgname = serein", f"pkgver = {version}-1", f"arch = {platform.machine()}",
+        for item in [f"pkgname = {pkg_name}", f"pkgver = {version}-1", f"arch = {platform.machine()}",
                      *(f"depend = {dependency}" for dependency in depends)]:
             if item not in metadata.splitlines():
                 raise ValueError(f"Missing Arch metadata: {item}")
@@ -347,7 +386,7 @@ def arch_package(temporary, stage, application_version, libraries):
                 raise ValueError(f"Unsafe Arch archive member: {member.name}")
             if member.name in {".PKGINFO", ".BUILDINFO", ".MTREE"}:
                 continue
-            expected_mode = 0o755 if member.isdir() or member.name == "usr/bin/serein" else 0o644
+            expected_mode = 0o755 if member.isdir() or member.name.startswith("usr/bin/") else 0o644
             if member.mode != expected_mode:
                 raise ValueError(f"Incorrect Arch payload mode: {member.name}")
             contents.extract(member, extracted, filter="data")
